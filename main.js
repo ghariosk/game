@@ -23,7 +23,7 @@ $(function(){
 
 			$(elementID).animate ({ 
 
-				bottom:'+=250px',
+				bottom:'+=500px',
 
 
 			},100 ) 
@@ -47,7 +47,7 @@ $(function(){
 
 			$(elementID).animate ({ 
 
-				left:'+=10px',
+				left:'+=20px',
 
 
 
@@ -65,7 +65,7 @@ $(function(){
 		} else if (direction=="left") {
 			$(elementID).animate ({ 
 
-				left:'-=10px',
+				left:'-=20px',
 
 
 			},100 ) 
@@ -168,6 +168,37 @@ $(function(){
 				// },100 ) 
 
 
+				var distance = $('.bad').offset().left - $('.missile').offset().left
+
+
+
+
+
+				if ( distance <= 0.1 ) {
+
+					
+
+					$('.bad').css({'background-image': 'url("images/exp.png")' ,
+					'position':'relative'})
+
+
+					delay(500)
+
+					
+
+					
+
+
+					$('.bad').remove()
+
+					
+
+
+
+				}
+
+
+
 
 
 
@@ -176,23 +207,66 @@ $(function(){
 
 		}
 
-		var position = [1,2,3,4,5,6,7,8,9,10]
 
 
-		for (var i = 0 ; i < position.length ; i ++) {
+		// $('.bad').animate ({
 
-			var random= Math.floor(Math.random()*position[i])
-			console.log(random)
-
-		}
-
-		$('.bad').animate ({
-
-			left:'200px'
+		// 	left:'200px'
 
 
 
-		})
+		// })
+
+
+
+function makeNewPosition(){
+    
+    // Get viewport dimensions (remove the dimension of the div)
+    var h = $(window).height() - 50;
+    var w = $(window).width() - 50;
+    
+    var nh = Math.floor(Math.random() * h);
+    var nw = Math.floor(Math.random() * w);
+    
+    return [nh,nw];    
+    
+}
+
+function animateDiv(){
+    var newq = makeNewPosition();
+
+    $('.bad').animate({ left: newq[1] },1500, function(){
+      animateDiv();        
+    });
+    
+};
+
+var move = animateDiv() 
+
+// var distance = $('.bad').offset().left - $('.missile').offset().left
+
+
+
+
+
+// if ( a  <= 50 ) {
+
+// 	$('.bad').remove()
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
