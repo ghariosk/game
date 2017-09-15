@@ -96,9 +96,9 @@ body {
 
 
 .bad {
-	background-image:url('images/bad.png');
-	width:30px;
-	height:45px;
+	background-image:url('images/bad1.png');
+	width:200px;
+	height:200px;
 	position : fixed;
 	background-size:contain;
 	background-repeat:no-repeat;

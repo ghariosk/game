@@ -201,16 +201,18 @@ $(function(){
 				// while (true) { 
 
 
-					// if ((distance_h <= 400 &&
-					// 	 distance_h >= -400) &&
-					// 	  (distance_v <= 400 &&
-					// 	   distance_v >= -400)){
+					if ((distance_h <= 500 &&
+						 distance_h >= -500) &&
+						  (distance_v <= 500 &&
+						   distance_v >= -500)){
 
-					// 	$('.bad').css({'background-image': 'url("images/exp.png")'})
+						$('.bad').css({'background-image': 'url("images/exp.png")'})
 
-					// 	$('.bad').remove().delay(500)
+						// $('.bad').remove().delay(500)
 
-					// }
+						$('.bad').css('jello')
+
+					}
 
 
 
@@ -264,7 +266,7 @@ function makeNewPosition(){
 
 
 
-	},8000, function(){
+	},10000, function(){
 
 
 	      animateDiv();  
@@ -291,12 +293,11 @@ function makeNewPosition(){
 // var distance = $('.bad').offset().left - $('.missile').offset().left
 
 
-
-
+animateDiv($('.bad'))
 
 // if ( a  <= 50 ) {
 
-// 	$('.bad').remove()
+	// $('.bad').remove()
 // }
 
 
