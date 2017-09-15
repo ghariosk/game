@@ -29,6 +29,8 @@ $(function(){
 		if (direction == "up") {
 
 
+		
+
 
 			$(elementID).animate ({ 
 
@@ -54,13 +56,20 @@ $(function(){
 				
 		} else if (direction=="right") {
 
-			$(elementID).animate ({ 
+			if (parseFloat(elementID.css('left').replace('px','')) < -20 || parseFloat(elementID.css('left').replace('px','')) >560) {
+
+				console.log('too far right')
+
+
+			
+
+			} else { $(elementID).animate ({ 
 
 				left:'+=10px',
 
 
 
-			},0.1 )  
+			},0.1 )  }
 
 
 			// $('.missile').animate ({
@@ -72,12 +81,18 @@ $(function(){
 			$
 
 		} else if (direction=="left") {
-			$(elementID).animate ({ 
+
+
+			if (parseFloat(elementID.css('left').replace('px','')) < 0 || parseFloat(elementID.css('left').replace('px','')) >(580) ) {
+
+				console.log('too far left')
+
+			} else { $(elementID).animate ({ 
 
 				left:'-=10px',
 
 
-			},0.1 ) 
+			},0.1 ) }
 
 
 			// $('.missile').animate ({
@@ -92,7 +107,7 @@ $(function(){
 
 
 
-		}
+		} 
 
 		var $pos = $('#small-ball').position()
 	}
@@ -123,8 +138,7 @@ $(function(){
 
 
 			$(document).keypress(function(e){ var $ufo = $('#UFO')
-			switch(e.which)
-			{
+			switch(e.which){
 				case 97 : moveViaKeyPress($ufo,'left');
 					break;
 
@@ -181,25 +195,32 @@ $(function(){
 				console.log(distance_v)
 
 
-				while (true) { 
 
 
-					if ((distance_h <= 400 &&
-						 distance_h >= -400) &&
-						  (distance_v <= 400 &&
-						   distance_v >= -400)){
 
-						$('.bad').css({'background-image': 'url("images/exp.png")'})
+				// while (true) { 
 
-						$('.bad').remove().delay(500)
 
-					}
+					// if ((distance_h <= 400 &&
+					// 	 distance_h >= -400) &&
+					// 	  (distance_v <= 400 &&
+					// 	   distance_v >= -400)){
+
+					// 	$('.bad').css({'background-image': 'url("images/exp.png")'})
+
+					// 	$('.bad').remove().delay(500)
+
+					// }
+
+
+
+
 
 					
 
 
 
-				}
+				
 
 
 

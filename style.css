@@ -1,8 +1,10 @@
 body {
-	background-color : green;
-	background-image:url('images/space.jpg');
-	background-size : contain;
+	height:auto;
+	background-color : black;
+	/*background-image:url('images/space.jpg');*/
+	background-size : ;
 	background-repeat:no-repeat;
+	background-size: 1500px 800px
 }
 
 #small-ball {
@@ -34,7 +36,7 @@ p {
 	border-top-right-radius: 50%;
 	border-top-left-radius: 50%;
 	border-radius:50px;
-	z-index:-1;
+	z-index:1;
 	bottom:9%;
 	left:85px;
 
@@ -70,10 +72,7 @@ body {
 
 	bottom:5%;
 
-
-
-
-
+	border:20px;
 }
 
 
@@ -82,20 +81,30 @@ body {
 	height:700px;
 	/*background-color:red;*/
 	margin:0 auto;
-}
+	position:relative;
+	border:1px solid white;
+	background-image:url('images/space.jpg');
+	background-size : ;
+	background-repeat:no-repeat;
+	background-size: 1500px 800px
+
+
+	
+	}
 
 
 
 
 .bad {
-	background-image:url('images/space-ship.png');
+	background-image:url('images/bad.png');
 	width:30px;
 	height:45px;
 	position : fixed;
 	background-size:contain;
 	background-repeat:no-repeat;
-	-webkit-transform: rotate(180deg);
+	/*-webkit-transform: rotate(180deg);*/
 	/*background-color:black;*/
+	color:green;
 
 
 
