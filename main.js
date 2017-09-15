@@ -9,13 +9,22 @@ $(function(){
 
 
 
+		
+
+
+
+
+
+
+
+
 
 
 
 
 	function moveViaKeyPress(elementID,direction) {
 
-		console.log('it works')
+		// console.log('it works')
 
 		if (direction == "up") {
 
@@ -37,7 +46,7 @@ $(function(){
 				bottom:'+=250px',
 
 
-			},100 ) 
+			},0.1) 
 
 			console.log('going down')
 
@@ -47,28 +56,28 @@ $(function(){
 
 			$(elementID).animate ({ 
 
-				left:'+=20px',
+				left:'+=10px',
 
 
 
-			},100 )  
+			},0.1 )  
 
 
 			// $('.missile').animate ({
 			// 	left:'+=10px',
 			// },100)
 
-			console.log('going right')
+			// console.log('going right')
 
 			$
 
 		} else if (direction=="left") {
 			$(elementID).animate ({ 
 
-				left:'-=20px',
+				left:'-=10px',
 
 
-			},100 ) 
+			},0.1 ) 
 
 
 			// $('.missile').animate ({
@@ -86,8 +95,6 @@ $(function(){
 		}
 
 		var $pos = $('#small-ball').position()
-
-		
 	}
 
 
@@ -140,7 +147,7 @@ $(function(){
 
 				var b = $("#UFO").position().left
 
-				console.log(b)
+				// console.log(b)
 				$('#main').append('<div class="missile"  </div>')
 
 				// style="left : $("#UFO").position().left;">
@@ -168,28 +175,25 @@ $(function(){
 				// },100 ) 
 
 
-				var distance = $('.bad').offset().left - $('.missile').offset().left
+				var distance_h = $('.bad').offset().left - $('.missile').offset().left
+				var distance_v=$('.bad').offset().top - $('.missile').offset().top
+
+				console.log(distance_v)
 
 
+				while (true) { 
 
 
+					if ((distance_h <= 400 &&
+						 distance_h >= -400) &&
+						  (distance_v <= 400 &&
+						   distance_v >= -400)){
 
-				if ( distance <= 0.1 ) {
+						$('.bad').css({'background-image': 'url("images/exp.png")'})
 
-					
+						$('.bad').remove().delay(500)
 
-					$('.bad').css({'background-image': 'url("images/exp.png")' ,
-					'position':'relative'})
-
-
-					delay(500)
-
-					
-
-					
-
-
-					$('.bad').remove()
+					}
 
 					
 
@@ -232,16 +236,36 @@ function makeNewPosition(){
     
 }
 
-function animateDiv(){
-    var newq = makeNewPosition();
+	function animateDiv(element){
+	    var newq = makeNewPosition();
 
-    $('.bad').animate({ left: newq[1] },1500, function(){
-      animateDiv();        
-    });
-    
+	    var move= $(element).animate({ left: newq[1],  top: '1000px',
+
+
+
+	},8000, function(){
+
+
+	      animateDiv();  
+
+	    //   var distance = $('.bad').offset().left - $('.missile').offset().left
+
+
+
+
+
+					// if ( distance <= 0.1 ) {
+
+					// 	move.stop()
+					// }
+
+
+	    });
 };
 
-var move = animateDiv() 
+
+
+
 
 // var distance = $('.bad').offset().left - $('.missile').offset().left
 
@@ -253,6 +277,9 @@ var move = animateDiv()
 
 // 	$('.bad').remove()
 // }
+
+
+
 
 
 
