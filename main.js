@@ -156,7 +156,7 @@ $(function(){
 				$('.missile').animate({
 					bottom:'1000px'
 
-				},2000)
+				},500)
 
 				// console.log('shoot')
 
@@ -175,6 +175,27 @@ $(function(){
 
 
 		}
+
+		var position = [1,2,3,4,5,6,7,8,9,10]
+
+
+		for (var i = 0 ; i < position.length ; i ++) {
+
+			var random= Math.floor(Math.random()*position[i])
+			console.log(random)
+
+		}
+
+		$('.bad').animate ({
+
+			left:'200px'
+
+
+
+		})
+
+
+
 
 
 
