@@ -1,8 +1,15 @@
+body {
+	background-color : green;
+	background-image:url('images/space.jpg');
+	background-size : contain;
+	background-repeat:no-repeat;
+}
+
 #small-ball {
 
 	width :200px;
 	height:200px;
-	background-color:black;
+	/*background-color:black;*/
 	border-radius:50%;
 	position : absolute
 	
@@ -88,7 +95,7 @@ body {
 	background-size:contain;
 	background-repeat:no-repeat;
 	-webkit-transform: rotate(180deg);
-	background-color:black;
+	/*background-color:black;*/
 
 
 
