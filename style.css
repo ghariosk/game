@@ -4,7 +4,73 @@
 	height:200px;
 	background-color:black;
 	border-radius:50%;
-	position:absolute;
+	position : absolute
 	
 
+
+}
+
+
+p {
+
+	position:absolute;
+
+}
+
+
+.missile {
+
+	height:100px;
+	width:3px;
+	background-color: green;
+	position:absolute;
+	border-top-right-radius: 50%;
+	border-top-left-radius: 50%;
+	z-index:-1;
+	bottom:5%;
+	left:85px;
+
+
+
+
+}
+
+
+
+
+/*
+
+
+body {
+
+	width:1000px;
+	height:1000px;
+}*/
+
+
+#UFO {
+
+	background-image:url('images/spaceship.png');
+	width :20px;
+	height : 30px;
+	/*background-color:white;*/
+	background-size: contain;
+	background-repeat: no-repeat;
+	/*-webkit-transform: rotate(180deg);*/
+	position:absolute;
+
+	bottom:5%;
+
+
+
+
+
+}
+
+
+#main {
+	width :600px;
+	height:700px;
+	/*background-color:red;*/
+	margin:0 auto;
 }
