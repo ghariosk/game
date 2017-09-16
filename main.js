@@ -174,10 +174,15 @@ $(function(){
 
 				var $p = $('p')
 
+				if (parseFloat($('.missile').css('bottom').replace('px','')) > 600 ) {
+					$('.missile').remove()
+				} else { 
+
 				$('.missile').animate({
+
 					bottom:'1000px'
 
-				},500)
+				},500) }
 
 				// console.log('shoot')
 
@@ -206,11 +211,15 @@ $(function(){
 						  (distance_v <= 500 &&
 						   distance_v >= -500)){
 
-						$('.bad').css({'background-image': 'url("images/exp.png")'})
+						console.log('css !!')
+
+						// $('.bad').css({'background-image': 'url("images/exp.png")'})
 
 						// $('.bad').remove().delay(500)
 
-						$('.bad').css('jello')
+						$('.bad').addClass('animated')
+
+						$('.bad').addClass('jello')
 
 					}
 
