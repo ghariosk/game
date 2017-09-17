@@ -203,31 +203,12 @@ function makeNewPosition(){
     
 }
 
-	function animateDiv(element){
-	    var newq = makeNewPosition();
-
-	    var move= $(element).animate({ left: newq[1]
-
-
-
-	},1000, function(){
-
-
-	      animateDiv();  
-
-	    //   var distance = $('.bad').offset().left - $('.missile').offset().left
-
-
-
-
-
-					// if ( distance <= 0.1 ) {
-
-					// 	move.stop()
-					// }
-
-
-	    });
+var animateDivV = function animateDiv(){
+    var newq = makeNewPosition();
+    $('.bad').animate({  left: newq[1] }, function(){
+      animateDiv();        
+    });
+    
 };
 
 
@@ -237,7 +218,7 @@ function makeNewPosition(){
 // var distance = $('.bad').offset().left - $('.missile').offset().left
 
 
-animateDiv($('.bad'))
+animateDivV($('.bad'))
 
 // if ( a  <= 50 ) {
 
