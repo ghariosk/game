@@ -8,13 +8,10 @@ $(function(){
 	console.log ('The dom is on!')
 
 
-$('#UFO').addClass('infinte')
-	$('#UFO').addClass('animated')
-	$('#UFO').addClass('fadeInUpBig')
-	$('#UFO').addClass('animated')
-
-	$('#UFO').addClass('fadeInRight')
-
+// $('#UFO').addClass('infinte')
+// 	$('#UFO').addClass('animated')
+// 	$('#UFO').addClass('fadeInUpBig')
+	
 
 
 
@@ -196,8 +193,8 @@ $('#UFO').addClass('infinte')
 function makeNewPosition(){
     
     // Get viewport dimensions (remove the dimension of the div)
-    var h = $(window).height() - 50;
-    var w = $(window).width() - 50;
+    var h = $('#main').height() - 100;
+    var w = $('#main').width() - 100;
     
     var nh = Math.floor(Math.random() * h);
     var nw = Math.floor(Math.random() * w);
@@ -209,11 +206,11 @@ function makeNewPosition(){
 	function animateDiv(element){
 	    var newq = makeNewPosition();
 
-	    var move= $(element).animate({ left: newq[1],  top: '1000px',
+	    var move= $(element).animate({ left: newq[1]
 
 
 
-	},10000, function(){
+	},1000, function(){
 
 
 	      animateDiv();  
@@ -421,9 +418,9 @@ function launchMissile() {
 
 
 
-				if (parseFloat($('.missile').css('bottom').replace('px','')) > 600 ) {
-					$('.missile').remove()
-				} else {
+				// if (parseFloat($('.missile').css('bottom').replace('px','')) > 600 ) {
+				// 	$('.missile').remove()
+				// } else {
 
 				$('.missile').animate({
 
@@ -486,7 +483,7 @@ function launchMissile() {
 				// },1000/24)
 
 
-				}
+				
 
 
 
@@ -514,10 +511,15 @@ function launchMissile() {
 
 var checkDistance = function() {
 
+	// $('.bad').remove('jello')
 
-	if ($('.bad').length > 0 )
+	
+
+
+	if ($('.missile').length > 0 ) {
 
 	console.log('hi')
+
 	var distance_h = $('.bad').offset().left - $('.missile').offset().left
 	var distance_v=$('.bad').offset().top - $('.missile').offset().top
 	console.log(distance_v)
@@ -527,19 +529,54 @@ var checkDistance = function() {
 			  (distance_v <= 100 &&
 			   distance_v >= -100)) {
 
-				console.log('css !!')
 
-				$('.bad').css({'background-image': 'url("images/exp.png")'})
+				if (count < 5) {
 
-				$('.bad').remove().delay(500)
 
+				
 				$('.bad').addClass('animated')
+				$('.bad').addClass('infinite')
 
 				$('.bad').addClass('jello')
-				$('.missile').hide(100)
+				
+				count ++
+				
+				$('div #counter').html('<p>'+ count +' </p>')
+				
 
-	 } else {
-		console.log('nothing')
+				$('.missile').remove()
+
+
+
+
+
+				} else {
+
+					console.log('css !!')
+
+					$('.bad').removeClass('jello')
+
+				$('.bad').css({'background-image': 'url("images/exp.png")'})
+				$('.bad').addClass('animated')
+				$('.bad').addClass('flash')
+
+				setTimeout(function() {
+
+					$('.bad').remove()
+
+
+				},2000)
+
+				
+
+				}
+
+
+
+		} else {
+			console.log('nothing')
+		}
+
 	}
 
 
@@ -557,7 +594,12 @@ var checkDistance = function() {
 
 
 setInterval (function (){
+
 	checkDistance()
+
+
+	if ($('.missile').length >0 && parseFloat($('.missile').css('bottom').replace('px','')) > 600 ) {
+					$('.missile').remove() }
 
 },1000/24)
 
