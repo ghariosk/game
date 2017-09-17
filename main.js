@@ -160,23 +160,23 @@ $('#UFO').addClass('infinte')
 		// }) 
 
 
-			$(document).keypress(function(e){ var $ufo = $('#UFO')
-			switch(e.which){
-				case 97 : moveViaKeyPress($ufo,'left');
-					break;
+		// 	$(document).keypress(function(e){ var $ufo = $('#UFO')
+		// 	switch(e.which){
+		// 		case 97 : moveViaKeyPress($ufo,'left');
+		// 			break;
 
 				
 
-				case 100 : moveViaKeyPress($ufo,'right');
-					break;
+		// 		case 100 : moveViaKeyPress($ufo,'right');
+		// 			break;
 
 
 				
 
-				case 32 : launchMissile()
-					break;
-			}
-		}) 
+		// 		case 32 : launchMissile()
+		// 			break;
+		// 	}
+		// }) 
 
 
 
@@ -259,22 +259,22 @@ animateDiv($('.bad'))
 var $character = $("#UFO")
 
 
-/// key detection (better to use addEventListener, but this will do)
-$('body').onkeyup = 
-$('body').onkeydown = function(e){
-  var kc = e.keyCode || e.which;
-  keys[kc] = e.type == 'keydown';
-};
+// /// key detection (better to use addEventListener, but this will do)
+// $('body').onkeyup = 
+// $('body').onkeydown = function(e){
+//   var kc = e.keyCode || e.which;
+//   keys[kc] = e.type == 'keydown';
+// };
 
 
 	$(document).keypress(function(e){ var $ufo = $('#UFO')
 			switch(e.which){
-				case 97 : var a =1  // moveViaKeyPress($ufo,'left');
+				case 97 : detectMoveCharacter(1) // moveViaKeyPress($ufo,'left');
 					break;
 
 				
 
-				case 100 : var a =2 // moveViaKeyPress($ufo,'right');
+				case 100 : detectMoveCharacter(-1) // moveViaKeyPress($ufo,'right');
 					break;
 
 
@@ -284,7 +284,11 @@ $('body').onkeydown = function(e){
 				e.preventDefault()
 					break;
 			}
-		}) 
+			
+	}) 
+
+
+
 
 /// character movement update
 // var moveCharacter = function(dx){
@@ -313,7 +317,48 @@ $('body').onkeydown = function(e){
 // /// game loop
 // setInterval(function(){
 //   detectCharacterMovement();
+
+
 // }, 500);
+
+var move = function (characterx) {
+
+
+return $("#UFO").css("left").replace("px","") + 1*characterx + "px"
+
+}
+
+
+var detectMoveCharacter = function (b) {
+
+	if (b === 1) {
+		$('#UFO').css( {'left' : '-=15' } )
+
+	} else if (b === -1) {
+		$('#UFO').css({ 'left': '+=15' })
+	}
+
+}
+
+
+setInterval( function() {
+
+
+
+var detectMoveCharacter = function (b) {
+
+	if (b === 1) {
+		$('#UFO').css( {'left' : '-=15' } )
+
+	} else if (b === -1) {
+		$('#UFO').css({ 'left': '+=15' })
+	}
+
+}
+
+
+
+},1000/24)
 
 
 
@@ -371,6 +416,8 @@ function launchMissile() {
 
 
 				var $p = $('p')
+
+				// checkDistance()
 
 
 
@@ -465,40 +512,54 @@ function launchMissile() {
 		}
 
 
-var collision = setInterval() ( function() {
-
-	// console.log('hi')
-	// var distance_h = $('.bad').offset().left - $('.missile').offset().left
-	// var distance_v=$('.bad').offset().top - $('.missile').offset().top
-	// console.log(distance_v)
-
-	// 	if ((distance_h <= 100   &&
-	// 		 distance_h >= -100) &&
-	// 		  (distance_v <= 100 &&
-	// 		   distance_v >= -100)) {
-
-	// 			console.log('css !!')
-
-	// 			// $('.bad').css({'background-image': 'url("images/exp.png")'})
-
-	// 			// $('.bad').remove().delay(500)
-
-	// 			$('.bad').addClass('animated')
-
-	// 			$('.bad').addClass('jello')
-	// 			$('.missile').hide(100)
+var checkDistance = function() {
 
 
+	if ($('.bad').length > 0 )
 
-	checkDistance($('.bad'), $('.missile'), 250, removeChar)
+	console.log('hi')
+	var distance_h = $('.bad').offset().left - $('.missile').offset().left
+	var distance_v=$('.bad').offset().top - $('.missile').offset().top
+	console.log(distance_v)
+
+		if ((distance_h <= 100   &&
+			 distance_h >= -100) &&
+			  (distance_v <= 100 &&
+			   distance_v >= -100)) {
+
+				console.log('css !!')
+
+				$('.bad').css({'background-image': 'url("images/exp.png")'})
+
+				$('.bad').remove().delay(500)
+
+				$('.bad').addClass('animated')
+
+				$('.bad').addClass('jello')
+				$('.missile').hide(100)
+
+	 } else {
+		console.log('nothing')
+	}
 
 
-				// $('div #counter').html('<p>'+ count +' </p>')
 
-				// count+=1
+// 	checkDistance($('.bad'), $('.missile'), 250, removeChar)
+
+
+// 				// $('div #counter').html('<p>'+ count +' </p>')
+
+// 				// count+=1
 				
-		// }
-}, 1000)
+		
+// }, 1000) 
+}
+
+
+setInterval (function (){
+	checkDistance()
+
+},1000/24)
 
 
 // setInterval(function(){
@@ -508,35 +569,35 @@ var collision = setInterval() ( function() {
 
 // // 
 
-var checkDistance = function (object1, object2, distance, action ) {
+// var checkDistance = function (object1, object2, distance, action ) {
 
-		var distance_h = object1.offset().left - object2.offset().left
-		var distance_v=object1.offset().top - object2.offset().top
-		console.log(distance_v)
+// 		var distance_h = object1.offset().left - object2.offset().left
+// 		var distance_v=object1.offset().top - object2.offset().top
+// 		console.log(distance_v)
 
-		if ((distance_h <= distance   &&
-			 distance_h >= -distance) &&
-			  (distance_v <= distance &&
-			   distance_v >= -distance)) {
+// 		if ((distance_h <= distance   &&
+// 			 distance_h >= -distance) &&
+// 			  (distance_v <= distance &&
+// 			   distance_v >= -distance)) {
 
-			action
-
-
+// 			action
 
 
 
 
 
-		} 
 
-}
 
-var removeChar= function(object1,object2,char) {
-	object1.remove()
-	object2.remove()
-	object1.css({'background-image': 'url("images/exp.png")'})
+// 		} 
 
-}
+// }
+
+// var removeChar= function(object1,object2,char) {
+// 	object1.remove()
+// 	object2.remove()
+// 	object1.css({'background-image': 'url("images/exp.png")'})
+
+// }
 
 
 
