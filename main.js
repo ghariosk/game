@@ -180,7 +180,7 @@ $(function(){
 		
 
 
-		// $('.bad').animate ({
+		// $('.bad2').animate ({
 
 		// 	left:'200px'
 
@@ -215,14 +215,14 @@ var animateDivV = function animateDiv(){
 
 
 
-// var distance = $('.bad').offset().left - $('.missile').offset().left
+// var distance = $('.bad2').offset().left - $('.missile').offset().left
 
 
-animateDivV($('.bad'))
+animateDivV($('.bad2'))
 
 // if ( a  <= 50 ) {
 
-	// $('.bad').remove()
+	// $('.bad2').remove()
 // }
 
 
@@ -427,8 +427,8 @@ function launchMissile() {
 
 				// 	setInterval(function(){ 
 
-				// 			var distance_h = $('.bad').offset().left - $('.missile').offset().left
-				// var distance_v=$('.bad').offset().top - $('.missile').offset().top
+				// 			var distance_h = $('.bad2').offset().left - $('.missile').offset().left
+				// var distance_v=$('.bad2').offset().top - $('.missile').offset().top
 
 				// console.log(distance_v)
 
@@ -444,13 +444,13 @@ function launchMissile() {
 
 				// 		console.log('css !!')
 
-				// 		// $('.bad').css({'background-image': 'url("images/exp.png")'})
+				// 		// $('.bad2').css({'background-image': 'url("images/exp.png")'})
 
-				// 		// $('.bad').remove().delay(500)
+				// 		// $('.bad2').remove().delay(500)
 
-				// 		$('.bad').addClass('animated')
+				// 		$('.bad2').addClass('animated')
 
-				// 		$('.bad').addClass('jello')
+				// 		$('.bad2').addClass('jello')
 
 				// 		$('.missile').hide(100)
 
@@ -490,9 +490,9 @@ function launchMissile() {
 		}
 
 
-var checkDistance = function() {
+var checkDistance = function(enemy) {
 
-	// $('.bad').remove('jello')
+	// $('.bad2').remove('jello')
 
 	
 
@@ -501,31 +501,31 @@ var checkDistance = function() {
 
 	console.log('hi')
 
-	var distance_h = $('.bad').offset().left - $('.missile').offset().left
-	var distance_v=$('.bad').offset().top - $('.missile').offset().top
+	var distance_h = $(enemy).offset().left - $('.missile').offset().left
+	var distance_v=$(enemy).offset().top - $('.missile').offset().top
 	console.log(distance_v)
 
-		if ((distance_h <= 100   &&
-			 distance_h >= -100) &&
-			  (distance_v <= 100 &&
-			   distance_v >= -100)) {
+		if ((distance_h <= 75   &&
+			 distance_h >= -75) &&
+			  (distance_v <= 75 &&
+			   distance_v >= -75)) {
 
 
 				if (count < 5) {
 
 
 				
-				$('.bad').addClass('animated')
-				$('.bad').addClass('infinite')
+				$(enemy).addClass('animated')
+				$(enemy).addClass('infinite')
 
-				$('.bad').addClass('jello')
+				$(enemy).addClass('jello')
 				
 				count ++
 				
 				$('div #counter').html('<p>'+ count +' </p>')
 				
 
-				$('.missile').remove()
+				// $(enemy).remove()
 
 
 
@@ -535,15 +535,19 @@ var checkDistance = function() {
 
 					console.log('css !!')
 
-					$('.bad').removeClass('jello')
+					$(enemy).removeClass('jello')
 
-				$('.bad').css({'background-image': 'url("images/exp.png")'})
-				$('.bad').addClass('animated')
-				$('.bad').addClass('flash')
+				$(enemy).css({'background-image': 'url("images/exp.png")'})
+				$(enemy).addClass('animated')
+				$(enemy).addClass('flash')
+
+				// animateDivV($('.bad2')).stop()
 
 				setTimeout(function() {
 
-					$('.bad').remove()
+					$(enemy).remove()
+					
+
 
 
 				},2000)
@@ -562,7 +566,7 @@ var checkDistance = function() {
 
 
 
-// 	checkDistance($('.bad'), $('.missile'), 250, removeChar)
+// 	checkDistance($('.bad2'), $('.missile'), 250, removeChar)
 
 
 // 				// $('div #counter').html('<p>'+ count +' </p>')
@@ -576,7 +580,10 @@ var checkDistance = function() {
 
 setInterval (function (){
 
-	checkDistance()
+	checkDistance($('.bad'))
+	checkDistance($('.minion'))
+
+
 
 
 	if ($('.missile').length >0 && parseFloat($('.missile').css('bottom').replace('px','')) > 600 ) {

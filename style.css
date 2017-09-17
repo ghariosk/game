@@ -82,19 +82,41 @@ body {
 	background-image:url('images/bad1.png');
 	width:200px;
 	height:200px;
+	
+
+
+}
+
+
+
+.bad2 {
+
+	
 	position : absolute;
 	background-size:contain;
 	background-repeat:no-repeat;
 	/*-webkit-transform: rotate(180deg);*/
 	/*background-color:black;*/
-	color:green;
 	
-	/*overflow: hidden*/
-
-
+	
 
 
 }
+
+
+
+
+.minion {
+
+
+	background-image:url('images/bad.png');
+	width:50px;
+	height:50px;
+
+}
+	
+
+
 
 
 #box-left{
