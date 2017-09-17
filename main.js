@@ -8,6 +8,15 @@ $(function(){
 	console.log ('The dom is on!')
 
 
+$('#UFO').addClass('infinte')
+	$('#UFO').addClass('animated')
+	$('#UFO').addClass('fadeInUpBig')
+	$('#UFO').addClass('animated')
+
+	$('#UFO').addClass('fadeInRight')
+
+
+
 
 
 
@@ -272,38 +281,39 @@ $('body').onkeydown = function(e){
 				
 
 				case 32 : launchMissile()
+				e.preventDefault()
 					break;
 			}
 		}) 
 
 /// character movement update
-var moveCharacter = function(dx){
+// var moveCharacter = function(dx){
 
 
-  var characterx
+//   var characterx
 
- characterx += dx||0;
+//  characterx += dx||0;
 
- $character.css('left') = characterx + 'px';
+//  $character.css('left') = characterx + 'px';
 
-};
+// };
 
-/// character control
-var detectCharacterMovement = function(){
-  if ( a=1 ) {
-    moveCharacter(-1);
-  }
-  else if( a=2 ) {
-    moveCharacter(1);
-  } else {}
+// /// character control
+// var detectCharacterMovement = function(){
+//   if ( a=1 ) {
+//     moveCharacter(-1);
+//   }
+//   else if( a=2 ) {
+//     moveCharacter(1);
+//   } else {}
 
 
-};
+// };
 
-/// game loop
-setInterval(function(){
-  detectCharacterMovement();
-}, 500);
+// /// game loop
+// setInterval(function(){
+//   detectCharacterMovement();
+// }, 500);
 
 
 
@@ -340,6 +350,7 @@ setInterval(function(){
 
 function launchMissile() {
 
+
 				var laser = new Audio("laser.mp3"); // buffers automatically when created
 
 
@@ -354,22 +365,24 @@ function launchMissile() {
 				// style="left : $("#UFO").position().left;">
 
 
-				$('.missile').css({'left' : b + 17 } )
+				$('.missile').css({'left' : b + 23 } )
 
 
 
 
 				var $p = $('p')
 
+
+
 				if (parseFloat($('.missile').css('bottom').replace('px','')) > 600 ) {
 					$('.missile').remove()
-				} else { 
+				} else {
 
 				$('.missile').animate({
 
 					bottom:'1000px'
 
-				},500) }
+				},500)  
 
 				// console.log('shoot')
 
@@ -381,48 +394,52 @@ function launchMissile() {
 				// },100 ) 
 
 
-				var distance_h = $('.bad').offset().left - $('.missile').offset().left
-				var distance_v=$('.bad').offset().top - $('.missile').offset().top
-
-				console.log(distance_v)
-
-
+			
 
 
 
 				// while (true) { 
 
+				// 	setInterval(function(){ 
+
+				// 			var distance_h = $('.bad').offset().left - $('.missile').offset().left
+				// var distance_v=$('.bad').offset().top - $('.missile').offset().top
+
+				// console.log(distance_v)
+
+
+
 					
 
 
-					if ((distance_h <= 500 &&
-						 distance_h >= -500) &&
-						  (distance_v <= 500 &&
-						   distance_v >= -500)){
+				// 	if ((distance_h <= 100 &&
+				// 		 distance_h >= -100) &&
+				// 		  (distance_v <= 100 &&
+				// 		   distance_v >= -100)){
 
-						console.log('css !!')
+				// 		console.log('css !!')
 
-						// $('.bad').css({'background-image': 'url("images/exp.png")'})
+				// 		// $('.bad').css({'background-image': 'url("images/exp.png")'})
 
-						// $('.bad').remove().delay(500)
+				// 		// $('.bad').remove().delay(500)
 
-						$('.bad').addClass('animated')
+				// 		$('.bad').addClass('animated')
 
-						$('.bad').addClass('jello')
+				// 		$('.bad').addClass('jello')
 
-						$('.missile').hide(100)
+				// 		$('.missile').hide(100)
 
-						
+				// 		$('div #counter').html('<p>'+ count +' </p>')
+				// 		count+=1
 
-						count ++
+				// 		distance_h=0
+				// 		distance_v=0
 
-						$('div #counter').html('<p>'+ count +' </p>')
+				// 	}
+				// },1000/24)
 
 
-
-						
-
-					}
+				}
 
 
 
@@ -448,6 +465,78 @@ function launchMissile() {
 		}
 
 
+var collision = setInterval() ( function() {
+
+	// console.log('hi')
+	// var distance_h = $('.bad').offset().left - $('.missile').offset().left
+	// var distance_v=$('.bad').offset().top - $('.missile').offset().top
+	// console.log(distance_v)
+
+	// 	if ((distance_h <= 100   &&
+	// 		 distance_h >= -100) &&
+	// 		  (distance_v <= 100 &&
+	// 		   distance_v >= -100)) {
+
+	// 			console.log('css !!')
+
+	// 			// $('.bad').css({'background-image': 'url("images/exp.png")'})
+
+	// 			// $('.bad').remove().delay(500)
+
+	// 			$('.bad').addClass('animated')
+
+	// 			$('.bad').addClass('jello')
+	// 			$('.missile').hide(100)
+
+
+
+	checkDistance($('.bad'), $('.missile'), 250, removeChar)
+
+
+				// $('div #counter').html('<p>'+ count +' </p>')
+
+				// count+=1
+				
+		// }
+}, 1000)
+
+
+// setInterval(function(){
+// 	console.log('hi')
+
+// },500)
+
+// // 
+
+var checkDistance = function (object1, object2, distance, action ) {
+
+		var distance_h = object1.offset().left - object2.offset().left
+		var distance_v=object1.offset().top - object2.offset().top
+		console.log(distance_v)
+
+		if ((distance_h <= distance   &&
+			 distance_h >= -distance) &&
+			  (distance_v <= distance &&
+			   distance_v >= -distance)) {
+
+			action
+
+
+
+
+
+
+
+		} 
+
+}
+
+var removeChar= function(object1,object2,char) {
+	object1.remove()
+	object2.remove()
+	object1.css({'background-image': 'url("images/exp.png")'})
+
+}
 
 
 

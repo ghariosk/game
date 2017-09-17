@@ -165,12 +165,13 @@ body {
 
 	
 /*	margin: -20px 0 0 -20px;*/
-	font-family: "Bank Gothic", "Futura", "Arial";
+	/*font-family: "Bank Gothic", "Futura", "Arial";*/
 	font-size: 30px;
 	opacity: .9;
 	/*text-align: left;*/
 	color: rgb(255, 255, 255);
 	text-shadow: 0 0 30px rgb(0, 200, 255);
+	font-family :Orbitron;
 
 
 }
