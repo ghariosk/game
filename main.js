@@ -1,5 +1,13 @@
+ var count=0 
+var hits =0 
 
-var count =0
+var lifeBad = 5
+var lifeMinion=1
+
+var countBad=0
+var countMinion=0
+
+var countA=0
 
 $(function(){
 
@@ -27,11 +35,13 @@ setInterval( function() {
 	$('#main').append('<div class="minion bad2" > </div> ')
 
 
-	setInterval(function(){
+	
+
+setInterval(function(){
+
 		checkDistance($('.minion'))
 
-	},1000/24)
-
+},1000/24)
 
 
 
@@ -519,19 +529,25 @@ function launchMissile() {
 		}
 
 
-var checkDistance = function(enemy) {
+var checkDistance = function(enemy,life) {
 
 	// $('.bad2').remove('jello')
 
 	
 
 
+	
+
+
 	if ($('.missile').length > 0 ) {
+
+
 
 	console.log('hi')
 
 	var distance_h = $(enemy).offset().left - $('.missile').offset().left
 	var distance_v=$(enemy).offset().top - $('.missile').offset().top
+
 	console.log(distance_v)
 
 		if ((distance_h <= 75   &&
@@ -539,8 +555,18 @@ var checkDistance = function(enemy) {
 			  (distance_v <= 75 &&
 			   distance_v >= -75)) {
 
+				$('.missile').remove()
 
-				if (count < 5) {
+				hits ++
+
+				countA = countA + hits 
+
+
+				if (countA < life) {
+
+				
+
+					
 
 
 				
@@ -548,13 +574,33 @@ var checkDistance = function(enemy) {
 				$(enemy).addClass('infinite')
 
 				$(enemy).addClass('jello')
-				
-				count ++
-				
-				$('div #counter').html('<p>'+ count +' </p>')
+
+
+				// hits ++
+
 				
 
-				// $(enemy).remove()
+				
+
+				// var countA = hits
+				
+				count=count+hits
+
+				hits =0
+
+
+
+			
+
+
+
+				
+				$('div #counter').html('<p>' + count + '</p>')
+				
+
+				// $(enemy).remove
+
+
 
 
 
@@ -562,9 +608,17 @@ var checkDistance = function(enemy) {
 
 				} else {
 
+
+					count=count+ hits
+					hits=0
+					countA=0
+
+					$('div #counter').html('<p>' + count + '</p>')
+
 					console.log('css !!')
 
-					$(enemy).removeClass('jello')
+				$(enemy).removeClass('jello')
+				$(enemy).removeClass(enemy)
 
 				$(enemy).css({'background-image': 'url("images/exp.png")'})
 				$(enemy).addClass('animated')
@@ -574,7 +628,15 @@ var checkDistance = function(enemy) {
 
 				setTimeout(function() {
 
+					// hits ++
+
 					$(enemy).remove()
+
+
+					
+					
+
+					return count
 					
 
 
@@ -609,8 +671,8 @@ var checkDistance = function(enemy) {
 
 setInterval (function (){
 
-	checkDistance($('.bad'))
-	checkDistance($('.minion'))
+	// checkDistance($('.bad'),lifeBad,countBad)
+	checkDistance($('.minion'),lifeMinion)
 
 
 
