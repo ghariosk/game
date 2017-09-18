@@ -107,6 +107,9 @@ setInterval (function() {
 
 setInterval(function(){
 	animateDivH($('.bad'))
+	animateDivV($('.minion'))
+
+
 
 
 
@@ -558,6 +561,129 @@ setInterval(function() {
 })
 
 },1000/24)
+
+setInterval(function(){
+
+	 $('.bad').each(function() {
+
+	if ($('.missile').length > 0 ) {
+
+
+
+
+	
+
+	var distance_h = $(this).offset().left - $('.missile').offset().left
+	var distance_v= $(this).offset().top - $('.missile').offset().top
+
+	console.log(distance_v)
+	console.log(distance_h)
+
+		if ((distance_h <= 100   &&
+			 distance_h >= -100) &&
+			  (distance_v <= 100 &&
+			   distance_v >= -100)) {
+
+
+				console.log('does it work')
+
+
+				$('.missile').remove()
+
+				hits ++
+
+				countA = countA + hits 
+
+
+				if (countA < 5) {
+
+				
+
+					
+
+
+				
+				$(this).addClass('animated')
+				$(this).addClass('infinite')
+
+				$(this).addClass('jello')
+
+
+			
+
+				
+
+				
+
+			
+				
+				count=count+hits
+
+				hits =0
+
+
+
+			
+
+
+
+				
+				$('div #counter').html('<p>' + count + '</p>')
+				
+				} else {
+
+					var exp = new Audio("exp.mp3"); // buffers automatically when created
+
+
+					exp.play();
+
+
+
+					count=count+ hits
+					hits=0
+					countA=0
+
+					$('div #counter').html('<p>' + count + '</p>')
+
+					console.log('css !!')
+
+					$(this).removeClass('jello')
+
+
+			
+				
+
+					$(this).css({'background-image': 'url("images/exp.png")'}).delay(200)
+
+					// $(this).addClass('animated')
+
+					// $(this).addClass('flash')
+
+					// $(this).slideUp(200)
+
+					// setTimeout(function() {
+
+					// 	console.log('removing')
+					// animateDivV($this).stop()
+						$(this).remove()
+						
+					// },1)
+				}
+
+
+
+	
+			}	
+		}
+
+
+})
+
+},1000/24)
+
+
+
+
 
 
 
