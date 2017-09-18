@@ -11,7 +11,36 @@ $(function(){
 // $('#UFO').addClass('infinte')
 // 	$('#UFO').addClass('animated')
 // 	$('#UFO').addClass('fadeInUpBig')
+
+
+// while ($('#UFO').length > 0 ) {
+
+setInterval( function() {
+
+	console.log('say hi')
+
+
+
+
+	console.log('say hi 2')
+
+	$('#main').append('<div class="minion bad2" > </div> ')
+
+
+	setInterval(function(){
+		checkDistance($('.minion'))
+
+	},1000/24)
+
+
+
+
+
+
+},4000)
 	
+
+// }
 
 
 
