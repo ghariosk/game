@@ -1,4 +1,4 @@
- var count=0 
+ var count=10
 var hits =0 
 
 var lifeBad = 5
@@ -9,6 +9,8 @@ var countBad=0
 var countMinion=0
 
 var countA=0
+
+
 
 var id ="0"
 
@@ -40,6 +42,17 @@ var animateDivV = function animateDiv(element){
     });
     
 };
+
+var animateDivH = function (element) {
+	var newq = makeNewPosition();
+    $(element).animate({  left: newq[1]}, function(){
+    	animateDivH(element)
+           
+    });
+
+};
+
+
 
 
 
@@ -93,8 +106,13 @@ setInterval (function() {
 
 
 setInterval(function(){
+	animateDivH($('.bad'))
 
-	animateDivV($('.minion'))
+
+
+
+	
+
 
 },1000/24)
 
@@ -364,11 +382,69 @@ var detectMoveCharacter = function (b) {
 
 
 
+function bossAttack() {
+	
+
+	var bossAttack = $('.bad').position().left
+
+
+	$('#main').append('<div class="attack attack1">  </div>')
+
+	$('#main').append('<div class="attack attack2">  </div>')
+	$('#main').append('<div class="attack attack3">  </div>')
+
+
+	$('.attack').css({'left': bossAttack+60 })
 
 
 
 
+	$('.attack1').animate({
 
+		top: '1000px'
+	
+
+	},1200)
+
+
+	$('.attack2').animate({
+		top:'1000px' ,
+		left:'+=300px'
+
+	},1200)
+
+	$('.attack3').animate({
+
+
+		top:'1000px' , 
+
+		left:'-=300px'
+	},1200)
+
+
+
+
+}
+
+
+
+
+setInterval(function() {
+
+	
+
+	bossAttack()
+
+
+
+},2000)
+
+
+
+setInterval(function() {
+	animateDivH($('.bad'))
+
+},1000/24)
 
 
 
@@ -438,19 +514,73 @@ function launchMissile() {
 				
 }
 
+setInterval(function() {
+
+	
+
+	 $('.attack').each(function() {
+
+
+	if (parseFloat($(this).css('top').replace('px','')) > 1200 ) {
+
+			$(this).remove()
+			console.log('nothing')
+	}
+
+ 	var distance_h1 = $(this).offset().left - $('#UFO').offset().left
+	var distance_v2= $(this).offset().top - $('#UFO').offset().top
+
+	if ((distance_h1 <= 35   &&
+			 distance_h1 >= -35) &&
+			  (distance_v2 <= 35 &&
+			   distance_v2 >= -35)) {
+
+		var $tick = $('#tick'+lifeUFO)
+
+		$(this).remove()
+
+
+
+
+
+		$tick.remove()
+
+		lifeUFO --
+
+		if (lifeUFO===0) {
+
+			$('#UFO').remove()
+			alert('Defeated! Press x to replay')
+		}
+
+	}	
+
+})
+
+},1000/24)
+
+
+
 setInterval(function(){ 
 
  $('.minion').each(function() {
 
-	console.log('working')
-
-		if (parseFloat($(this).css('top').replace('px','')) > 1200 ) {
+ 		if (parseFloat($(this).css('top').replace('px','')) > 1200 ) {
 
 			$(this).remove()
 			console.log('nothing')
+		}
 
 
-		} 
+ 	
+
+
+	console.log('working')
+
+		
+
+
+		
 
 
 
@@ -485,8 +615,6 @@ setInterval(function(){
 		
 
 		}
-
-
 
 
 
