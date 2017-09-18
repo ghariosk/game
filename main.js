@@ -608,6 +608,12 @@ var checkDistance = function(enemy,life) {
 
 				} else {
 
+					var exp = new Audio("exp.mp3"); // buffers automatically when created
+
+
+						exp.play();
+
+
 
 					count=count+ hits
 					hits=0
