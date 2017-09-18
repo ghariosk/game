@@ -641,7 +641,7 @@ var checkDistance = function(enemy,life) {
 
 
 
-				},2000)
+				},250)
 
 				
 
