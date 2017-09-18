@@ -9,37 +9,64 @@ var countMinion=0
 
 var countA=0
 
+var id ="0"
+
+
 $(function(){
+
+
+function makeNewPosition(){
+    
+    // Get viewport dimensions (remove the dimension of the div)
+    var h = $('#main').height() - 100;
+    var w = $('#main').width() - 50;
+    
+    var nh = Math.floor(Math.random() * h);
+    var nw = Math.floor(Math.random() * w*0.8);
+    
+    return [nh,nw];    
+    
+}
+
+
+var animateDivV = function animateDiv(element){
+    var newq = makeNewPosition();
+    $(element).animate({  left: newq[1] ,top :'+=30px'}, function(){
+    	animateDiv(element)
+           
+    });
+    
+};
+
+
+
+
+
+
 
 
 
 	console.log ('The dom is on!')
 
 
-// $('#UFO').addClass('infinte')
-// 	$('#UFO').addClass('animated')
-// 	$('#UFO').addClass('fadeInUpBig')
 
 
-// while ($('#UFO').length > 0 ) {
-
-setInterval( function() {
-
-	console.log('say hi')
-
-
-
-
-	console.log('say hi 2')
-
-	$('#main').append('<div class="minion bad2" > </div> ')
+setInterval (function() {
+	$('#main').append('<div class="minion bad2" id="'+id + '"> </div> ')
+	
+	id ++
+	return id
 
 
 	
 
+
+},4000)
+
+
 setInterval(function(){
 
-		checkDistance($('.minion'))
+	animateDivV($('.minion'))
 
 },1000/24)
 
@@ -47,32 +74,7 @@ setInterval(function(){
 
 
 
-},4000)
-	
-
-// }
-
-
-
-
-
-		
-
-
-
-
-
-
-
-
-
-
-
-
-	function moveViaKeyPress(elementID,direction) {
-
-		// console.log('it works')
-
+function moveViaKeyPress(elementID,direction) {
 		if (direction == "up") {
 
 
@@ -89,17 +91,6 @@ setInterval(function(){
 			console.log('going up')
 
 			elementID.css({'transform' : 'rotate3d(0,1,0,60deg)'})
-
-		} else if (direction=="down") {
-
-			$(elementID).animate ({ 
-
-				bottom:'+=250px',
-
-
-			},0.1) 
-
-			console.log('going down')
 
 
 				
@@ -168,32 +159,11 @@ setInterval(function(){
 
 		} 
 
-		var $pos = $('#small-ball').position()
+	
 	}
 
 
 
-
-		// $(document).keypress(function(e){ var $ball = $('#small-ball')
-		// 	switch(e.which)
-		// 	{
-		// 		case 97 : moveViaKeyPress($ball,'left');
-		// 			break;
-
-		// 		case 115 : moveViaKeyPress($ball,'down');
-		// 			break;
-
-		// 		case 100 : moveViaKeyPress($ball,'right');
-		// 			break;
-
-		// 		case 119 : moveViaKeyPress($ball,'up');
-
-		// 			break;
-
-		// 		case 32 : launchMissile()
-		// 			break;
-		// 	}
-		// }) 
 
 
 		// 	$(document).keypress(function(e){ var $ufo = $('#UFO')
@@ -229,27 +199,10 @@ setInterval(function(){
 
 
 
-function makeNewPosition(){
-    
-    // Get viewport dimensions (remove the dimension of the div)
-    var h = $('#main').height() - 100;
-    var w = $('#main').width() - 100;
-    
-    var nh = Math.floor(Math.random() * h);
-    var nw = Math.floor(Math.random() * w);
-    
-    return [nh,nw];    
-    
-}
 
-var animateDivV = function animateDiv(){
-    var newq = makeNewPosition();
-    $('.bad').animate({  left: newq[1] }, function(){
-      animateDiv();        
-    });
-    
-};
 
+
+  // animateDiv($('.bad'); 
 
 
 
@@ -257,7 +210,8 @@ var animateDivV = function animateDiv(){
 // var distance = $('.bad2').offset().left - $('.missile').offset().left
 
 
-animateDivV($('.bad2'))
+
+
 
 // if ( a  <= 50 ) {
 
@@ -394,7 +348,7 @@ var detectMoveCharacter = function (b) {
 
 
 
-	setInterval(function(){
+	// setInterval(function(){
 
 
 
@@ -406,7 +360,7 @@ var detectMoveCharacter = function (b) {
 
 
 
-	},1000/24)
+	// },1000/24)
 
 
 
@@ -454,87 +408,14 @@ function launchMissile() {
 
 				// top:'+=250px',
 
-
-				// },100 ) 
-
-
 			
+}
 
+setInterval(function(){ 
 
+ $('.minion').each(function() {
 
-				// while (true) { 
-
-				// 	setInterval(function(){ 
-
-				// 			var distance_h = $('.bad2').offset().left - $('.missile').offset().left
-				// var distance_v=$('.bad2').offset().top - $('.missile').offset().top
-
-				// console.log(distance_v)
-
-
-
-					
-
-
-				// 	if ((distance_h <= 100 &&
-				// 		 distance_h >= -100) &&
-				// 		  (distance_v <= 100 &&
-				// 		   distance_v >= -100)){
-
-				// 		console.log('css !!')
-
-				// 		// $('.bad2').css({'background-image': 'url("images/exp.png")'})
-
-				// 		// $('.bad2').remove().delay(500)
-
-				// 		$('.bad2').addClass('animated')
-
-				// 		$('.bad2').addClass('jello')
-
-				// 		$('.missile').hide(100)
-
-				// 		$('div #counter').html('<p>'+ count +' </p>')
-				// 		count+=1
-
-				// 		distance_h=0
-				// 		distance_v=0
-
-				// 	}
-				// },1000/24)
-
-
-				
-
-
-
-
-
-
-
-
-					
-
-
-
-				
-
-
-
-
-
-
-				// var pos= $ball.css('top')
-
-
-		}
-
-
-var checkDistance = function(enemy,life) {
-
-	// $('.bad2').remove('jello')
-
-	
-
+	console.log('working')
 
 	
 
@@ -543,17 +424,23 @@ var checkDistance = function(enemy,life) {
 
 
 
-	console.log('hi')
 
-	var distance_h = $(enemy).offset().left - $('.missile').offset().left
-	var distance_v=$(enemy).offset().top - $('.missile').offset().top
+	
+
+	var distance_h = $('.minion').offset().left - $('.missile').offset().left
+	var distance_v= $(this).offset().top - $('.missile').offset().top
 
 	console.log(distance_v)
+	console.log(distance_h)
 
 		if ((distance_h <= 75   &&
 			 distance_h >= -75) &&
 			  (distance_v <= 75 &&
 			   distance_v >= -75)) {
+
+
+				console.log('does it work')
+
 
 				$('.missile').remove()
 
@@ -562,7 +449,7 @@ var checkDistance = function(enemy,life) {
 				countA = countA + hits 
 
 
-				if (countA < life) {
+				if (countA < 1) {
 
 				
 
@@ -570,19 +457,19 @@ var checkDistance = function(enemy,life) {
 
 
 				
-				$(enemy).addClass('animated')
-				$(enemy).addClass('infinite')
+				$(this).addClass('animated')
+				$(this).addClass('infinite')
 
-				$(enemy).addClass('jello')
+				$(this).addClass('jello')
 
 
-				// hits ++
-
-				
+			
 
 				
 
-				// var countA = hits
+				
+
+			
 				
 				count=count+hits
 
@@ -597,21 +484,12 @@ var checkDistance = function(enemy,life) {
 				
 				$('div #counter').html('<p>' + count + '</p>')
 				
-
-				// $(enemy).remove
-
-
-
-
-
-
-
 				} else {
 
 					var exp = new Audio("exp.mp3"); // buffers automatically when created
 
 
-						exp.play();
+					exp.play();
 
 
 
@@ -623,34 +501,25 @@ var checkDistance = function(enemy,life) {
 
 					console.log('css !!')
 
-				$(enemy).removeClass('jello')
-				$(enemy).removeClass(enemy)
-
-				$(enemy).css({'background-image': 'url("images/exp.png")'})
-				$(enemy).addClass('animated')
-				$(enemy).addClass('flash')
-
-				// animateDivV($('.bad2')).stop()
-
-				setTimeout(function() {
-
-					// hits ++
-
-					$(enemy).remove()
-
-
-					
-					
-
-					return count
-					
-
-
-
-				},250)
-
+					$(this).removeClass('jello')
 				
 
+					$(this).css({'background-image': 'url("images/exp.png")'})
+
+					// $(this).addClass('animated')
+
+					// $(this).addClass('flash')
+
+					// $(this).slideUp(200)
+
+					// setTimeout(function() {
+
+					// 	console.log('removing')
+					animateDivV($this).stop()
+
+						$(this).remove()
+						
+					// },1)
 				}
 
 
@@ -662,69 +531,138 @@ var checkDistance = function(enemy,life) {
 	}
 
 
-
-// 	checkDistance($('.bad2'), $('.missile'), 250, removeChar)
-
-
-// 				// $('div #counter').html('<p>'+ count +' </p>')
-
-// 				// count+=1
-				
-		
-// }, 1000) 
-}
-
-
-setInterval (function (){
-
-	// checkDistance($('.bad'),lifeBad,countBad)
-	checkDistance($('.minion'),lifeMinion)
-
-
-
-
-	if ($('.missile').length >0 && parseFloat($('.missile').css('bottom').replace('px','')) > 600 ) {
-					$('.missile').remove() }
+})
 
 },1000/24)
 
 
+
+
+
+
+
+
+
+setInterval (function (){
+
+
+
+if ($('.missile').length >0 && parseFloat($('.missile').css('bottom').replace('px','')) > 600 ) {
+					$('.missile').remove() }
+
+
+	
+		// var a = checkDistance($('#0'),lifeMinion)
+		
+		// var b = checkDistance($('#2'),lifeMinion)
+		// var c = checkDistance($('#3'),lifeMinion)
+		// checkDistance($('#4'),lifeMinion)
+		// checkDistance($('#5'),lifeMinion)
+
+
+
+			// checkDistance($('.minion')).each()
+
+			checkDistance
+
+
+	
+
+
+
+
+	
+},1000/24)
+
+
+
+// setInterval(function(){ 
+
+
+// for (var i =0 ; i<id+10 ; i++) {
+
+
+
+// 		setInterval( function(){
+// 			checkDistance($("'#"+i+ "'"))
+// 		},1000/24)
+	
+
+// }
+
+// },1000/24)
+
+
+
+// setInterval (function (){
+ 
+// 	// checkDistance($('.bad'),lifeBad,countBad)
+// 	// checkDistance($('.minion'),lifeMinion)
+
+
+
+	
+// 		var a = checkDistance($('#1'),lifeMinion)
+		
+// 		var b = checkDistance($('#2'),lifeMinion)
+// 	},1000/24)
+
+
+
+
+
+// function checkMinion (enemy) {
+// 	setInterval (function() {
+// 		checkDistance(enemy,lifeMinion)
+// 	},1000/24)
+// }
+
+// checkMinion($('#0'))
+
+
+
+
+
+
 // setInterval(function(){
-// 	console.log('hi')
 
-// },500)
+// 	var a = checkDistance($('#0'),lifeMinion)
+// },1000/24)
 
-// // 
+// setInterval(function(){
 
-// var checkDistance = function (object1, object2, distance, action ) {
-
-// 		var distance_h = object1.offset().left - object2.offset().left
-// 		var distance_v=object1.offset().top - object2.offset().top
-// 		console.log(distance_v)
-
-// 		if ((distance_h <= distance   &&
-// 			 distance_h >= -distance) &&
-// 			  (distance_v <= distance &&
-// 			   distance_v >= -distance)) {
-
-// 			action
+// 	var a = checkDistance($('#1'),lifeMinion)
+// },1000/24)
 
 
 
+// setInterval(function(){
+
+// 	var a = checkDistance($('#2'),lifeMinion)
+// },1000/24)
+
+// setInterval(function(){
+
+// 	var a = checkDistance($('#3'),lifeMinion)
+// },1000/24)
+
+
+// setInterval(function(){
+
+// 	var a = checkDistance($('#4'),lifeMinion)
+// },1000/24)
+
+// setInterval(function(){
+
+// 	var a = checkDistance($('#5'),lifeMinion)
+// },1000/24)
 
 
 
 
-// 		} 
 
-// }
 
-// var removeChar= function(object1,object2,char) {
-// 	object1.remove()
-// 	object2.remove()
-// 	object1.css({'background-image': 'url("images/exp.png")'})
 
-// }
 
 
 
