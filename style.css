@@ -206,6 +206,62 @@ p {
 
 }
 
+.flash {
+
+
+}
 
 
 
+#life {
+	width:170px;
+	height:30px;
+
+	position:absolute;
+	top:30px;
+	right:30px;
+	border-radius:5px;
+}
+
+#tick1 {
+	width:45px;
+	height:15px;
+	background-color:blue;
+	display:inline-block;
+	border:0 solid black;
+	position:relative;
+	border-top-left-radius:5px;
+	border-bottom-left-radius:5px;
+
+
+}
+
+#tick2 {
+	width:45px;
+	height:15px;
+	background-color:blue;
+	display:inline-block;
+	border: 0 solid black;
+		position:relative;
+
+
+
+
+
+}
+
+#tick3{
+	width:45px;
+	height:15px;
+	background-color:blue;
+	display:inline-block;
+	border:0 solid black;
+		position:relative;
+		border-top-right-radius:5px;
+	border-bottom-right-radius:5px;
+
+
+
+
+
+}

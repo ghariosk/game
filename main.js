@@ -3,6 +3,7 @@ var hits =0
 
 var lifeBad = 5
 var lifeMinion=1
+var lifeUFO=3
 
 var countBad=0
 var countMinion=0
@@ -10,6 +11,8 @@ var countMinion=0
 var countA=0
 
 var id ="0"
+
+var bossTime=0
 
 
 $(function(){
@@ -52,10 +55,35 @@ var animateDivV = function animateDiv(element){
 
 
 setInterval (function() {
+
+
+
+	if (count%10===0 && count!==0) {
+
+		$('#main').append('<div class="bad bad2"> </div>')
+
+		var laugh = new Audio("laugh.mp3"); // buffers automatically when created
+
+
+		laugh.play()
+
+		count=2.5
+
+	} else if (count===2.5) {
+
+
+	
+
+
+
+	} else {
+
 	$('#main').append('<div class="minion bad2" id="'+id + '"> </div> ')
 	
 	id ++
 	return id
+
+    }
 
 
 	
@@ -407,8 +435,7 @@ function launchMissile() {
 				// $().animate ({ 
 
 				// top:'+=250px',
-
-			
+				
 }
 
 setInterval(function(){ 
@@ -416,6 +443,54 @@ setInterval(function(){
  $('.minion').each(function() {
 
 	console.log('working')
+
+		if (parseFloat($(this).css('top').replace('px','')) > 1200 ) {
+
+			$(this).remove()
+			console.log('nothing')
+
+
+		} 
+
+
+
+
+	var distance_h1 = $(this).offset().left - $('#UFO').offset().left
+	var distance_v2= $(this).offset().top - $('#UFO').offset().top
+
+	if ((distance_h1 <= 35   &&
+			 distance_h1 >= -35) &&
+			  (distance_v2 <= 35 &&
+			   distance_v2 >= -35)) {
+
+		var $tick = $('#tick'+lifeUFO)
+
+		$(this).remove()
+
+
+
+
+
+		$tick.remove()
+
+		lifeUFO --
+
+		if (lifeUFO===0) {
+
+			$('#UFO').remove()
+			alert('Defeated! Press x to replay')
+		}
+
+		
+		
+
+		}
+
+
+
+
+
+
 
 	
 
@@ -427,16 +502,16 @@ setInterval(function(){
 
 	
 
-	var distance_h = $('.minion').offset().left - $('.missile').offset().left
+	var distance_h = $(this).offset().left - $('.missile').offset().left
 	var distance_v= $(this).offset().top - $('.missile').offset().top
 
 	console.log(distance_v)
 	console.log(distance_h)
 
-		if ((distance_h <= 75   &&
-			 distance_h >= -75) &&
-			  (distance_v <= 75 &&
-			   distance_v >= -75)) {
+		if ((distance_h <= 35   &&
+			 distance_h >= -35) &&
+			  (distance_v <= 35 &&
+			   distance_v >= -35)) {
 
 
 				console.log('does it work')
@@ -502,9 +577,12 @@ setInterval(function(){
 					console.log('css !!')
 
 					$(this).removeClass('jello')
+
+
+			
 				
 
-					$(this).css({'background-image': 'url("images/exp.png")'})
+					$(this).css({'background-image': 'url("images/exp.png")'}).delay(200)
 
 					// $(this).addClass('animated')
 
@@ -515,8 +593,7 @@ setInterval(function(){
 					// setTimeout(function() {
 
 					// 	console.log('removing')
-					animateDivV($this).stop()
-
+					// animateDivV($this).stop()
 						$(this).remove()
 						
 					// },1)
@@ -524,11 +601,9 @@ setInterval(function(){
 
 
 
-		} else {
-			console.log('nothing')
+	
+			}	
 		}
-
-	}
 
 
 })
@@ -562,16 +637,6 @@ if ($('.missile').length >0 && parseFloat($('.missile').css('bottom').replace('p
 
 
 			// checkDistance($('.minion')).each()
-
-			checkDistance
-
-
-	
-
-
-
-
-	
 },1000/24)
 
 
