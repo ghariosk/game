@@ -134,36 +134,36 @@ $start.on('click', function() {
 
 
 
-	function moveViaKeyPress(elementID,direction) {
-		if (direction == "up") {
-			$(elementID).animate ({ 
-				bottom:'+=500px',
-				},100 ) 
-			console.log('going up')
-			elementID.css({'transform' : 'rotate3d(0,1,0,60deg)'})
-		} else if (direction=="right") {
-			if (parseFloat(elementID.css('left').replace('px','')) < -20 || parseFloat(elementID.css('left').replace('px','')) >560) {
-				console.log('too far right')
-			} else {
-				$(elementID).animate ({ 
-					left:'+=10px',
-				},0.1 )
-			}  
-				// $(elementID).css({ 'transform' : 'rotate3d(0,1,0,-50deg)'})}
-				// $('.missile').animate ({
-				// 	left:'+=10px',
-				// },100)
-				// console.log('going right')
-		} else if (direction=="left") {
-			if (parseFloat(elementID.css('left').replace('px','')) < 0 || parseFloat(elementID.css('left').replace('px','')) >(580) ) {
-				console.log('too far left')
-			} else { 
-				$(elementID).animate ({ 
-					left:'-=10px',
-				},0.1 )
-			}
-		}
-	}
+	// function moveViaKeyPress(elementID,direction) {
+	// 	if (direction == "up") {
+	// 		$(elementID).animate ({ 
+	// 			bottom:'+=500px',
+	// 			},100 ) 
+	// 		console.log('going up')
+	// 		elementID.css({'transform' : 'rotate3d(0,1,0,60deg)'})
+	// 	} else if (direction=="right") {
+	// 		if (parseFloat(elementID.css('left').replace('px','')) < -20 || parseFloat(elementID.css('left').replace('px','')) >560) {
+	// 			console.log('too far right')
+	// 		} else {
+	// 			$(elementID).animate ({ 
+	// 				left:'+=10px',
+	// 			},0.1 )
+	// 		}  
+	// 			// $(elementID).css({ 'transform' : 'rotate3d(0,1,0,-50deg)'})}
+	// 			// $('.missile').animate ({
+	// 			// 	left:'+=10px',
+	// 			// },100)
+	// 			// console.log('going right')
+	// 	} else if (direction=="left") {
+	// 		if (parseFloat(elementID.css('left').replace('px','')) < 0 || parseFloat(elementID.css('left').replace('px','')) >(580) ) {
+	// 			console.log('too far left')
+	// 		} else { 
+	// 			$(elementID).animate ({ 
+	// 				left:'-=10px',
+	// 			},0.1 )
+	// 		}
+	// 	}
+	// }
 
 
 			// $(elementID).css({ 'transform' : 'rotate3d(1,1,0,-50deg)'}) 
@@ -175,8 +175,8 @@ $start.on('click', function() {
 
 			// 	left:'-=10px',
 			// },100)
-		console.log('going left')
-
+	
+// 
 
 
 	$(document).keypress(function(e){ var $ufo = $('#UFO')
@@ -244,315 +244,177 @@ $start.on('click', function() {
 
 
 
-setInterval(function() {
-	bossAttack()
-},2000)
+	setInterval(function() {
+		bossAttack()
+	},2000)
 
 
+	setInterval(function() {
+		animateDivH($('.bad'))
+	},1000/24)
 
-setInterval(function() {
-	animateDivH($('.bad'))
+	function launchMissile() {
+		var laser = new Audio("laser.mp3"); // buffers automatically when created
+		laser.play();
+		var b = $("#UFO").position().left
+		$('#main').append('<div class="missile"  </div>')
+		$('.missile').css({'left' : b + 23 } )
+		var $p = $('p')
+		$('.missile').animate({
+			bottom:'1000px'
 
-},1000/24)
-
-
-
-function launchMissile() {
-
-
-				var laser = new Audio("laser.mp3"); // buffers automatically when created
-
-
-				laser.play();
-
-
-				var b = $("#UFO").position().left
-
-
-				$('#main').append('<div class="missile"  </div>')
-
-			
-
-
-				$('.missile').css({'left' : b + 23 } )
-
-
-
-
-				var $p = $('p')
-
-
-				$('.missile').animate({
-
-					bottom:'1000px'
-
-				},500)  
-}
-
-setInterval(function() {
-
-	
-
-	 $('.attack').each(function() {
-
-
-	if (parseFloat($(this).css('top').replace('px','')) > 1200 ) {
-
-			$(this).remove()
-			console.log('nothing')
+		},500)  
 	}
 
- 	var distance_h1 = $(this).offset().left - $('#UFO').offset().left
-	var distance_v2= $(this).offset().top - $('#UFO').offset().top
-
-	if ((distance_h1 <= 35   &&
-			 distance_h1 >= -35) &&
-			  (distance_v2 <= 35 &&
-			   distance_v2 >= -35)) {
-
-
-
-		var $tick = $('#tick'+lifeUFO)
-
-		$tick.delay(2000).fadeOut(3000)
-
-		// $(this).remove()
-
-		// $tick.addClass('animated')
-
-		// $tick.addClass('bounceOutUp')
-
-
-
-
-
-
-		$tick.remove()
-
-		lifeUFO --
-
-		if (lifeUFO===0) {
-
-			$('#UFO').remove()
-
-			$('.hidden').css({ "display" : "none"})
-
-			alert('Defeated! Press x to replay')
-
-		}
-
-	}	
-
-})
-
-},1000/24)
-
-
-
-setInterval(function(){
-
-	 $('.bad').each(function() {
-
-	if ($('.missile').length > 0 ) {
-
-
-
-
-	
-
-	var distance_h = $(this).offset().left - $('.missile').offset().left
-	var distance_v= $(this).offset().top - $('.missile').offset().top
-
-	console.log(distance_v)
-	console.log(distance_h)
-
-		if ((distance_h <= 100   &&
-			 distance_h >= -100) &&
-			  (distance_v <= 100 &&
-			   distance_v >= -100)) {
-
-
-				console.log('does it work')
-
-
-				$('.missile').remove()
-
-				hits ++
-
-				countA = countA + hits 
-
-
-				if (countA < 5) {
-
-				
-
-					
-
-
-				
-				$(this).addClass('animated')
-				$(this).addClass('infinite')
-
-				$(this).addClass('jello')
-
-
-			
-
-				
-
-				
-
-			
-				
-				count=count+hits
-
-				hits =0
-
-
-
-			
-
-
-
-				
-				$('div #counter').html('<p>' + count + '</p>')
-				
-				} else {
-
-					var exp = new Audio("exp.mp3"); // buffers automatically when created
-
-
-					exp.play();
-
-
-
-					count=count+ hits
-					hits=0
-					countA=0
-
-					$('div #counter').html('<p>' + count + '</p>')
-
-					console.log('css !!')
-
-					$(this).removeClass('jello')
-
-
-			
-				
-
-					$(this).css({'background-image': 'url("images/exp.png")'})
-
-					// $(this).addClass('animated')
-
-					// $(this).addClass('flash')
-
-					// $(this).slideUp(200)
-
-					// setTimeout(function() {
-
-					// 	console.log('removing')
-					// animateDivV($this).stop()
-						$(this).delay(2000).remove()
-
-						bossTime=0
-						
-					// },1)
-				}
-
-
-
-	
-			}	
-		}
-
-
-})
-
-},1000/24)
-
-
-
-
-
-
-
-setInterval(function(){ 
-	$('.minion').each(function() {
-		if (parseFloat($(this).css('top').replace('px','')) > 1200  ) {
+	setInterval(function() {
+		$('.attack').each(function() {
+			if (parseFloat($(this).css('top').replace('px','')) > 1200 ) {
 				$(this).remove()
 				console.log('nothing')
-		}
-		var distance_h1 = $(this).offset().left - $('#UFO').offset().left
-		var distance_v2= $(this).offset().top - $('#UFO').offset().top
-		if (    (distance_h1 <= 35 &&
-				distance_h1 >= -35)&&
-				(distance_v2 <= 35 &&
-				distance_v2 >= -35 && 
-				$(this).hasClass('bounceOutDown')===false)) {
-			var $tick = $('#tick'+lifeUFO)
-			$(this).remove()
-			$tick.toggle(1000)
-			lifeUFO --
-			if (lifeUFO === 0) {
-				$('#UFO').remove()
-				$('.hidden').css({"display" :'none' })
-				$('#logo').css({'display' : 'none'})
-				$('.textRestart').css({'display' : "block"})
-				$('#restart').css({'display' : 'block'})
-				$('#restart').on('click', function () {restart=false})
 			}
-		}
-		if ($('.missile').length > 0 ){
-			var distance_h = $(this).offset().left - $('.missile').offset().left
-			var distance_v= $(this).offset().top - $('.missile').offset().top
-			console.log(distance_v)
-			console.log(distance_h)
-			if ((distance_h <= 35   &&
-					 distance_h >= -35) &&
-					  (distance_v <= 35 &&
-					   distance_v >= -35)) {
-				$('.missile').remove()
-				hits ++
-				countA = countA + hits 
-				if (countA < 1) {
-					$(this).addClass('animated')
-					$(this).addClass('infinite')
-					$(this).addClass('jello')
-					count=count+hits
-					hits =0
-					$('div #counter').html('<p>' + count + '</p>')
-				} else {
-					var exp = new Audio("exp.mp3"); // buffers automatically when created
-					exp.play();
-					count=count+ hits
-					hits=0
-					countA=0
-					$('div #counter').html('<p>' + count + '</p>')
-					$(this).removeClass('jello')
-						if ( count === 10 ) {bossTime = 1}
-					$(this).css({'background-image': 'url("images/exp.png")'}).delay(200)
-					$(this).addClass('animated')
-					$(this).addClass('bounceOutDown')
+
+			var distance_h1 = $(this).offset().left - $('#UFO').offset().left
+			var distance_v2= $(this).offset().top - $('#UFO').offset().top
+
+			if ((distance_h1 <= 35   &&
+					 distance_h1 >= -35) &&
+					  (distance_v2 <= 35 &&
+					   distance_v2 >= -35)) {
+				var $tick = $('#tick'+lifeUFO)
+				$tick.delay(2000).fadeOut(3000)
+				$tick.remove()
+				lifeUFO --
+				if (lifeUFO===0) {
+
+					$('#UFO').remove()
+
+					$('.hidden').css({ "display" : "none"})
+
+					alert('Defeated! Press x to replay')
 				}
 			}	
-		}
-	})
-},1000/24)
+		})
+	},1000/24)
 
 
 
+	setInterval(function(){
+		$('.bad').each(function() {
+			if ($('.missile').length > 0 ) {
+				var distance_h = $(this).offset().left - $('.missile').offset().left
+				var distance_v= $(this).offset().top - $('.missile').offset().top
+				console.log(distance_v)
+				console.log(distance_h)
+				if ((distance_h <= 100   &&
+				 distance_h >= -100) &&
+				  (distance_v <= 100 &&
+				   distance_v >= -100)) {
+					console.log('does it work')
+					$('.missile').remove()
+					hits ++
+					countA = countA + hits 
+					if (countA < 5) {
+						$(this).addClass('animated')
+						$(this).addClass('infinite')
+						$(this).addClass('jello')
+						count=count+hits
+						hits =0
+						$('div #counter').html('<p>' + count + '</p>')
+					} else {
+						var exp = new Audio("exp.mp3"); // buffers automatically when created
+						exp.play();
+						count=count+ hits
+						hits=0
+						countA=0
+						$('div #counter').html('<p>' + count + '</p>')
+						console.log('css !!')
+						$(this).removeClass('jello')
+						$(this).css({'background-image': 'url("images/exp.png")'})
 
+						// $(this).addClass('animated')
 
+						// $(this).addClass('flash')
 
+						// $(this).slideUp(200)
 
+						// setTimeout(function() {
 
+						// 	console.log('removing')
+						// animateDivV($this).stop()
+						$(this).delay(2000).remove()
+						bossTime=0
+					}
+				}	
+			}
+		})
+	},1000/24)
+
+	setInterval(function(){ 
+							$('.minion').each(function() {
+								if (parseFloat($(this).css('top').replace('px','')) > 1200  ) {
+										$(this).remove()
+										console.log('nothing')
+								}
+								var distance_h1 = $(this).offset().left - $('#UFO').offset().left
+								var distance_v2= $(this).offset().top - $('#UFO').offset().top
+								if (    (distance_h1 <= 35 &&
+										distance_h1 >= -35)&&
+										(distance_v2 <= 35 &&
+										distance_v2 >= -35 && 
+										$(this).hasClass('bounceOutDown')===false)) {
+									var $tick = $('#tick'+lifeUFO)
+									$(this).remove()
+									$tick.toggle(1000)
+									lifeUFO --
+									if (lifeUFO === 0) {
+										$('#UFO').remove()
+										$('.hidden').css({"display" :'none' })
+										$('#logo').css({'display' : 'none'})
+										$('.textRestart').css({'display' : "block"})
+										$('#restart').css({'display' : 'block'})
+										$('#restart').on('click', function () {restart=false})
+									}
+								}
+								if ($('.missile').length > 0 ){
+									var distance_h = $(this).offset().left - $('.missile').offset().left
+									var distance_v= $(this).offset().top - $('.missile').offset().top
+									console.log(distance_v)
+									console.log(distance_h)
+									if ((distance_h <= 35   &&
+											 distance_h >= -35) &&
+											  (distance_v <= 35 &&
+											   distance_v >= -35)) {
+										$('.missile').remove()
+										hits ++
+										countA = countA + hits 
+										if (countA < 1) {
+											$(this).addClass('animated')
+											$(this).addClass('infinite')
+											$(this).addClass('jello')
+											count=count+hits
+											hits =0
+											$('div #counter').html('<p>' + count + '</p>')
+										} else {
+											var exp = new Audio("exp.mp3"); // buffers automatically when created
+											exp.play();
+											count=count+ hits
+											hits=0
+											countA=0
+											$('div #counter').html('<p>' + count + '</p>')
+											$(this).removeClass('jello')
+												if ( count === 10 ) {bossTime = 1}
+											$(this).css({'background-image': 'url("images/exp.png")'}).delay(200)
+											$(this).addClass('animated')
+											$(this).addClass('bounceOutDown')
+										}
+									}	
+								}
+							})
+	},1000/24)
 
 	setInterval (function (){
-
-
-
-	if ($('.missile').length >0 && parseFloat($('.missile').css('bottom').replace('px','')) > 600 ) {
-						$('.missile').remove() }
+		if ($('.missile').length >0 && parseFloat($('.missile').css('bottom').replace('px','')) > 600 ) {
+			$('.missile').remove() }
 
 	},1000/24)
 
