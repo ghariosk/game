@@ -37,26 +37,46 @@ $(function(){
 
 $('#logo').animateCss('bounceInDown')
 
+$('#start').animateCss('bounceInLeft')
+
+
+
+
 setTimeout ( function () {  
 
 $('#logo').animateCss('tada');
 
+
+
 },500)
 
-// setTimeout(function () {
+$('#logo').on('click', function () {
+	console.log('hello')
 
-// $('#logo').animate({
-// 	left:'20px',
-
-// 	top:'50px',
-
-// 	width:'300px',
-// 	height:'200px'
+})
 
 
-// },500)
+$('#start').on('click', function() {
 
-// },500)
+	$('#start').css({"display" : "none"})
+
+	$('.hidden').css({"display" :'block' })
+
+
+setTimeout(function () {
+
+$('#logo').animate({
+	left:'20px',
+
+	top:'50px',
+
+	width:'300px',
+	height:'200px'
+
+
+},500)
+
+},50)
 
 
 
@@ -613,7 +633,11 @@ setInterval(function() {
 		if (lifeUFO===0) {
 
 			$('#UFO').remove()
+
+			$('.hidden').css({"display" : "none"})
+
 			alert('Defeated! Press x to replay')
+
 		}
 
 	}	
@@ -1064,7 +1088,7 @@ if ($('.missile').length >0 && parseFloat($('.missile').css('bottom').replace('p
 
 
 
-
+});
 
 
 
