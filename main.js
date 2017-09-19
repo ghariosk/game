@@ -17,6 +17,18 @@ var id ="0"
 var bossTime=0
 var restart = true
 
+var words1 = "Millions of light years away in the Galaxy of Sparta is under attack… "
+var words2 = "The evil monkeys are attempting to invade your homespace in their flying saucers again. There are also rumours they have perfected their biological weapon, and created giant toxic octopuses that they now venerate as gods. Your job today, officer, is to eliminate as much of them as possible. Also try and take down these creatures they have made."
+var words3="Good luck!"
+
+var myArray1 = words1.split('')
+var myArray2 = words2.split('')
+var myArray3= words2.split('')
+
+console.log(myArray1)
+
+
+
 
 $(function(){
 
@@ -191,9 +203,6 @@ $start.on('click', function() {
 		}
 	}) 
 
-
-
-
 	var move = function (characterx) {
 		return $("#UFO").css("left").replace("px","") + 1*characterx + "px"
 	}
@@ -217,11 +226,6 @@ $start.on('click', function() {
 		}
 	},1000/24)
 
-
-
-
-
-
 	function bossAttack() {
 		var bossAttack = $('.bad').position().left
 		$('#main').append('<div class="attack attack1">  </div>')
@@ -240,9 +244,6 @@ $start.on('click', function() {
 			left:'-=300px'
 		},1200)
 	}
-
-
-
 
 	setInterval(function() {
 		bossAttack()
@@ -417,26 +418,7 @@ $start.on('click', function() {
 			$('.missile').remove() }
 
 	},1000/24)
-
-
-
-
-
-
-
-
-
-
-
-
 })
-
-
-
-
-
-
-
 
 })
 
