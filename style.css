@@ -296,3 +296,26 @@ p {
 	top:30%;
 
 }
+
+#start {
+/*	background-color:#607d8b;*/
+	width:200px;
+	height:50px;
+	background-image:url('images/start.png');
+	position:fixed;
+	z-dinex:1;
+	background-size:contain;
+	background-repeat: no-repeat;
+	left:25%;
+	top:50%;
+	border-radius:5px ;
+	border: 3px solid grey;
+	
+	background-position:center;
+
+}
+
+
+#hidden{
+	display:none;
+}

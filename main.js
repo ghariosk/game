@@ -21,14 +21,17 @@ $(function(){
 
 
 	$.fn.extend({
-    animateCss: function (animationName) {
-        var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
-        this.addClass('animated ' + animationName).one(animationEnd, function() {
-            $(this).removeClass('animated ' + animationName);
-        });
-        return this;
-    }
-});
+	    animateCss: function (animationName) {
+	        var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+	        this.addClass('animated ' + animationName).one(animationEnd, function() {
+	            $(this).removeClass('animated ' + animationName);
+	        });
+	        return this;
+    	}
+	});
+
+
+
 
 
 
@@ -40,20 +43,20 @@ $('#logo').animateCss('tada');
 
 },500)
 
-setTimeout(function () {
+// setTimeout(function () {
 
-$('#logo').animate({
-	left:'20px',
+// $('#logo').animate({
+// 	left:'20px',
 
-	top:'50px',
+// 	top:'50px',
 
-	width:'300px',
-	height:'200px'
+// 	width:'300px',
+// 	height:'200px'
 
 
-},500)
+// },500)
 
-},500)
+// },500)
 
 
 
