@@ -134,181 +134,118 @@ $start.on('click', function() {
 
 
 
-function moveViaKeyPress(elementID,direction) {
-	if (direction == "up") {
-		$(elementID).animate ({ 
-			bottom:'+=500px',
-			},100 ) 
-		console.log('going up')
-		elementID.css({'transform' : 'rotate3d(0,1,0,60deg)'})
-	} else if (direction=="right") {
-		if (parseFloat(elementID.css('left').replace('px','')) < -20 || parseFloat(elementID.css('left').replace('px','')) >560) {
-			console.log('too far right')
-		} else {
+	function moveViaKeyPress(elementID,direction) {
+		if (direction == "up") {
 			$(elementID).animate ({ 
-				left:'+=10px',
-			},0.1 )
-		}  
-
-			// $(elementID).css({ 'transform' : 'rotate3d(0,1,0,-50deg)'})}
-			// $('.missile').animate ({
-			// 	left:'+=10px',
-			// },100)
-			// console.log('going right')
-
+				bottom:'+=500px',
+				},100 ) 
+			console.log('going up')
+			elementID.css({'transform' : 'rotate3d(0,1,0,60deg)'})
+		} else if (direction=="right") {
+			if (parseFloat(elementID.css('left').replace('px','')) < -20 || parseFloat(elementID.css('left').replace('px','')) >560) {
+				console.log('too far right')
+			} else {
+				$(elementID).animate ({ 
+					left:'+=10px',
+				},0.1 )
+			}  
+				// $(elementID).css({ 'transform' : 'rotate3d(0,1,0,-50deg)'})}
+				// $('.missile').animate ({
+				// 	left:'+=10px',
+				// },100)
+				// console.log('going right')
 		} else if (direction=="left") {
 			if (parseFloat(elementID.css('left').replace('px','')) < 0 || parseFloat(elementID.css('left').replace('px','')) >(580) ) {
 				console.log('too far left')
-		} else { $(elementID).animate ({ 
+			} else { 
+				$(elementID).animate ({ 
+					left:'-=10px',
+				},0.1 )
+			}
+		}
+	}
 
-				left:'-=10px',
-
-
-
-			},0.1 )
 
 			// $(elementID).css({ 'transform' : 'rotate3d(1,1,0,-50deg)'}) 
 
 			// $(elementID).addClass('animated')
 
 			// $(elementID).addClass('flipInY') 
-			}
-
-
 			// $('.missile').animate ({
 
 			// 	left:'-=10px',
 			// },100)
-
-
-
-			console.log('going left')
-
+		console.log('going left')
 
 
 
 	$(document).keypress(function(e){ var $ufo = $('#UFO')
-			switch(e.which){
-				case 97 : detectMoveCharacter(1) // moveViaKeyPress($ufo,'left');
-					break;
-
-				
-
-				case 100 : detectMoveCharacter(-1) // moveViaKeyPress($ufo,'right');
-					break;
-
-
-				
-
-				case 32 : launchMissile()
-				e.preventDefault()
-					break;
-			}
-			
+		switch(e.which){
+			case 97 : detectMoveCharacter(1) // moveViaKeyPress($ufo,'left');
+				break;
+			case 100 : detectMoveCharacter(-1) // moveViaKeyPress($ufo,'right');
+				break;
+			case 32 : launchMissile()
+					e.preventDefault()
+				break;
+		}
 	}) 
 
 
 
 
-var move = function (characterx) {
-
-
-return $("#UFO").css("left").replace("px","") + 1*characterx + "px"
-
-}
-
-
-var detectMoveCharacter = function (b) {
-
-	if (b === 1) {
-		$('#UFO').css( {'left' : '-=15' } )
-
-	} else if (b === -1) {
-		$('#UFO').css({ 'left': '+=15' })
+	var move = function (characterx) {
+		return $("#UFO").css("left").replace("px","") + 1*characterx + "px"
 	}
 
-}
-
-
-setInterval( function() {
-
-
-
-var detectMoveCharacter = function (b) {
-
-	if (b === 1) {
-		$('#UFO').css( {'left' : '-=15' } )
-
-	} else if (b === -1) {
-		$('#UFO').css({ 'left': '+=15' })
+	var detectMoveCharacter = function (b) {
+		if (b === 1) {
+			$('#UFO').css( {'left' : '-=15' } )
+		} else if (b === -1) {
+			$('#UFO').css({ 'left': '+=15' })
+		}
 	}
 
-}
 
-
-
-},1000/24)
-
-
-
-
-
-
-function bossAttack() {
-	
-
-	var bossAttack = $('.bad').position().left
-
-
-	$('#main').append('<div class="attack attack1">  </div>')
-
-	$('#main').append('<div class="attack attack2">  </div>')
-	$('#main').append('<div class="attack attack3">  </div>')
-
-
-	$('.attack').css({'left': bossAttack+60 })
+	setInterval( function() {
+		var detectMoveCharacter = function (b) {
+			if (b === 1) {
+				$('#UFO').css( {'left' : '-=15' } )
+			} else if (b === -1) {
+				$('#UFO').css({ 'left': '+=15' })
+			}
+		}
+	},1000/24)
 
 
 
 
-	$('.attack1').animate({
-
-		top: '1000px'
-	
-
-	},1200)
 
 
-	$('.attack2').animate({
-		top:'1000px' ,
-		left:'+=300px'
-
-	},1200)
-
-	$('.attack3').animate({
-
-
-		top:'1000px' , 
-
-		left:'-=300px'
-	},1200)
-
-
-
-
-}
+	function bossAttack() {
+		var bossAttack = $('.bad').position().left
+		$('#main').append('<div class="attack attack1">  </div>')
+		$('#main').append('<div class="attack attack2">  </div>')
+		$('#main').append('<div class="attack attack3">  </div>')
+		$('.attack').css({'left': bossAttack+60 })
+		$('.attack1').animate({
+			top: '1000px'
+		},1200)
+		$('.attack2').animate({
+			top:'1000px' ,
+			left:'+=300px'
+		},1200)
+		$('.attack3').animate({
+			top:'1000px' , 
+			left:'-=300px'
+		},1200)
+	}
 
 
 
 
 setInterval(function() {
-
-	
-
 	bossAttack()
-
-
-
 },2000)
 
 
