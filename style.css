@@ -319,4 +319,41 @@ p {
 	display:none;
 }
 
+#restart {
+
+	width:400px;
+	height:75px;
+	background-image:url('images/restart.png');
+	position:fixed;
+	z-index:1;
+	background-size: contain;
+	background-repeat: no-repeat;
+	left:40%;
+	top:55%;
+	display:none;
+
+}
+
+.textRestart {
+
+	width:600px;
+	height:100px;
+	position:fixed;
+	z-index:1;
+	background-size: contain;
+	background-repeat: no-repeat;
+	left:32%;
+	top:10%;
+	display:none;
+	font-family :Orbitron;
+	font-size: 30px;
+	opacity: .9;
+	/*text-align: left;*/
+	color: rgb(255, 255, 255);
+	text-shadow: 0 0 30px rgb(0, 200, 255);
+
+
+
+}
+
 

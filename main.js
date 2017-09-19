@@ -15,9 +15,13 @@ var countA=0
 var id ="0"
 
 var bossTime=0
+var restart = true
 
 
 $(function(){
+
+
+	console.log ('The dom is on!')
 
 
 	$.fn.extend({
@@ -30,226 +34,132 @@ $(function(){
     	}
 	});
 
+$('#logo').animateCss('bounceInDown');
+$('#start').animateCss('bounceInLeft');
 
+setTimeout ( function () {$('#logo').animateCss('tada')},500)
 
 
 
 
-$('#logo').animateCss('bounceInDown')
-
-$('#start').animateCss('bounceInLeft')
-
-
-
-
-setTimeout ( function () {  
-
-$('#logo').animateCss('tada');
-
-
-
-},500)
-
-$('#logo').on('click', function () {
-	console.log('hello')
-
-})
-
-
-$('#start').on('click', function() {
-
-	$('#start').css({"display" : "none"})
-
-	$('.hidden').css({"display" :'block' })
-
-
-setTimeout(function () {
-
-$('#logo').animate({
-	left:'20px',
-
-	top:'50px',
-
-	width:'300px',
-	height:'200px'
-
-
-},500)
-
-},50)
-
-
-
-
-// $('#logo').addClass('bounceInDown')
-
-// $(#'logo').removeClass('animated')
-
-
-
-
-function makeNewPosition(){
-    
-    // Get viewport dimensions (remove the dimension of the div)
-    var h = $('#main').height() - 100;
-    var w = $('#main').width() - 50;
-    
-    var nh = Math.floor(Math.random() * h);
-    var nw = Math.floor(Math.random() * w*0.8);
-    
-    return [nh,nw];    
-    
-}
-
-
-var animateDivV = function animateDiv(element){
-    var newq = makeNewPosition();
-    $(element).animate({  left: newq[1] ,top :'+=30px'}, function(){
-    	animateDiv(element)
-           
-    });
-    
-};
-
-var animateDivH = function (element) {
-	var newq = makeNewPosition();
-    $(element).animate({  left: newq[1]}, function(){
-    	animateDivH(element)
-           
-    });
-
-};
-
-
-
-
-
-
-
-
-
-
-
-	console.log ('The dom is on!')
-
-
-
-
-setInterval (function() {
-
-
-
-	if (count%10===0 && count!==0) {
-
-		$('#main').append('<div class="bad bad2"> </div>')
-
-		var laugh = new Audio("laugh.mp3"); // buffers automatically when created
-
-
-		laugh.play()
-		count=0
-
-		bossTime=1
-
-	} else if (bossTime===1) {
-
-
-
-
-	
-
-
-
-	} else if (bossTime===0) {
-
-	$('#main').append('<div class="minion bad2" id="'+id + '"> </div> ')
-	
-	id ++
-	return id
-
-    }
-
-
-	
-
-
-},4000)
+$start=$('#start')
 
 
 setInterval(function(){
-	animateDivH($('.bad'))
-	animateDivV($('.minion'))
+	if (restart===false) {
+		$('#start').off()
+		$('.hidden').css({"display" :'block' })
+		$('#restart').css({'display' : 'none'})
+		$('.textRestart').css({'display' : 'none' })
+		$('#logo').css({'display' : 'block'})
+		$('#main').prepend('<div id="UFO"> </div> ')
+		$('#life').prepend('<div id="tick1"> </div> <div id="tick2"> </div> <div id="tick3"> </div>')
+		$('div #counter').html('<p>' + count + '</p>')
 
-
-
-
-
-
-	
-
-
+		hits =0 
+		lifeBad = 5
+		lifeMinion=1
+		lifeUFO=3
+		countBad=0
+		countMinion=0
+		countA=0
+		id ="0"
+		bossTime=0
+		restart = true
+		count=0
+	}
 },1000/24)
+
+
+$start.on('click', function() {
+	$('#start').css({"display" : "none"});
+	$('.hidden').css({"display" :'block' });
+
+	setTimeout(function () {$('#logo').animate({left:'20px',top:'50px',width:'300px',height:'200px'},500)},50);
+
+
+
+
+
+	function makeNewPosition(){
+	    
+	    // Get viewport dimensions (remove the dimension of the div)
+	    var h = $('#main').height() - 100;
+	    var w = $('#main').width() - 50;
+	    
+	    var nh = Math.floor(Math.random() * h);
+	    var nw = Math.floor(Math.random() * w*0.8);
+	    
+	    return [nh,nw];    
+	}
+
+
+	var animateDivV = function animateDiv(element){
+	    var newq = makeNewPosition();
+	    $(element).animate({  left: newq[1] ,top :'+=30px'}, function(){
+	    	animateDiv(element)
+	    });
+	};
+
+	var animateDivH = function (element) {
+		var newq = makeNewPosition();
+	    $(element).animate({  left: newq[1]}, function(){
+	    	animateDivH(element)
+	    });
+	};
+
+	setInterval (function() {
+		if (count%10===0 && count!==0) {
+			$('#main').append('<div class="bad bad2"> </div>')
+			var laugh = new Audio("laugh.mp3"); // buffers automatically when created
+			laugh.play()
+			bossTime=1
+		} else if (bossTime===1) {//nothing
+		} else if (bossTime===0) {
+			$('#main').append('<div class="minion bad2" id="'+id + '"> </div> ')
+			id ++
+			return id
+		}
+	},4000)
+
+
+	setInterval(function(){
+
+		animateDivH($('.bad'))
+		animateDivV($('.minion'))
+
+	},1000/24)
 
 
 
 
 
 function moveViaKeyPress(elementID,direction) {
-		if (direction == "up") {
-
-
-		
-
-
-			$(elementID).animate ({ 
-
-				bottom:'+=500px',
-
-
+	if (direction == "up") {
+		$(elementID).animate ({ 
+			bottom:'+=500px',
 			},100 ) 
-
-			console.log('going up')
-
-			elementID.css({'transform' : 'rotate3d(0,1,0,60deg)'})
-
-
-				
-		} else if (direction=="right") {
-
-			if (parseFloat(elementID.css('left').replace('px','')) < -20 || parseFloat(elementID.css('left').replace('px','')) >560) {
-
-				console.log('too far right')
-
-				
-
-
-			
-
-			} else { $(elementID).animate ({ 
-
+		console.log('going up')
+		elementID.css({'transform' : 'rotate3d(0,1,0,60deg)'})
+	} else if (direction=="right") {
+		if (parseFloat(elementID.css('left').replace('px','')) < -20 || parseFloat(elementID.css('left').replace('px','')) >560) {
+			console.log('too far right')
+		} else {
+			$(elementID).animate ({ 
 				left:'+=10px',
-				},0.1 )  
+			},0.1 )
+		}  
 
-				// $(elementID).css({ 'transform' : 'rotate3d(0,1,0,-50deg)'}) 
-			}
-
-
+			// $(elementID).css({ 'transform' : 'rotate3d(0,1,0,-50deg)'})}
 			// $('.missile').animate ({
 			// 	left:'+=10px',
 			// },100)
-
 			// console.log('going right')
 
-			
-
 		} else if (direction=="left") {
-
-
 			if (parseFloat(elementID.css('left').replace('px','')) < 0 || parseFloat(elementID.css('left').replace('px','')) >(580) ) {
-
 				console.log('too far left')
-
-			} else { $(elementID).animate ({ 
+		} else { $(elementID).animate ({ 
 
 				left:'-=10px',
 
@@ -277,87 +187,6 @@ function moveViaKeyPress(elementID,direction) {
 
 
 
-		} 
-
-	
-	}
-
-
-
-
-
-		// 	$(document).keypress(function(e){ var $ufo = $('#UFO')
-		// 	switch(e.which){
-		// 		case 97 : moveViaKeyPress($ufo,'left');
-		// 			break;
-
-				
-
-		// 		case 100 : moveViaKeyPress($ufo,'right');
-		// 			break;
-
-
-				
-
-		// 		case 32 : launchMissile()
-		// 			break;
-		// 	}
-		// }) 
-
-
-
-		
-
-
-		// $('.bad2').animate ({
-
-		// 	left:'200px'
-
-
-
-		// })
-
-
-
-
-
-
-  // animateDiv($('.bad'); 
-
-
-
-
-// var distance = $('.bad2').offset().left - $('.missile').offset().left
-
-
-
-
-
-// if ( a  <= 50 ) {
-
-	// $('.bad2').remove()
-// }
-
-
-/// store key codes and currently pressed ones
-// var keys = {
-
-//     keysLeft: '97';
-//     keysRight: '100';
-//   }
-
-/// store reference to character's position and element
-var $character = $("#UFO")
-
-
-// /// key detection (better to use addEventListener, but this will do)
-// $('body').onkeyup = 
-// $('body').onkeydown = function(e){
-//   var kc = e.keyCode || e.which;
-//   keys[kc] = e.type == 'keydown';
-// };
-
-
 	$(document).keypress(function(e){ var $ufo = $('#UFO')
 			switch(e.which){
 				case 97 : detectMoveCharacter(1) // moveViaKeyPress($ufo,'left');
@@ -380,37 +209,6 @@ var $character = $("#UFO")
 
 
 
-
-/// character movement update
-// var moveCharacter = function(dx){
-
-
-//   var characterx
-
-//  characterx += dx||0;
-
-//  $character.css('left') = characterx + 'px';
-
-// };
-
-// /// character control
-// var detectCharacterMovement = function(){
-//   if ( a=1 ) {
-//     moveCharacter(-1);
-//   }
-//   else if( a=2 ) {
-//     moveCharacter(1);
-//   } else {}
-
-
-// };
-
-// /// game loop
-// setInterval(function(){
-//   detectCharacterMovement();
-
-
-// }, 500);
 
 var move = function (characterx) {
 
@@ -522,26 +320,6 @@ setInterval(function() {
 
 
 
-
-
-
-
-	// setInterval(function(){
-
-
-
-	
-	
-
-
-
-
-
-
-	// },1000/24)
-
-
-
 function launchMissile() {
 
 
@@ -553,10 +331,10 @@ function launchMissile() {
 
 				var b = $("#UFO").position().left
 
-				// console.log(b)
+
 				$('#main').append('<div class="missile"  </div>')
 
-				// style="left : $("#UFO").position().left;">
+			
 
 
 				$('.missile').css({'left' : b + 23 } )
@@ -566,26 +344,12 @@ function launchMissile() {
 
 				var $p = $('p')
 
-				// checkDistance()
-
-
-
-				// if (parseFloat($('.missile').css('bottom').replace('px','')) > 600 ) {
-				// 	$('.missile').remove()
-				// } else {
 
 				$('.missile').animate({
 
 					bottom:'1000px'
 
 				},500)  
-
-				// console.log('shoot')
-
-				// $().animate ({ 
-
-				// top:'+=250px',
-				
 }
 
 setInterval(function() {
@@ -617,16 +381,16 @@ setInterval(function() {
 
 		// $(this).remove()
 
-		$tick.addClass('animated')
+		// $tick.addClass('animated')
 
-		$tick.addClass('bounceOutUp')
-
-
+		// $tick.addClass('bounceOutUp')
 
 
 
 
-		// $tick.remove()
+
+
+		$tick.remove()
 
 		lifeUFO --
 
@@ -634,7 +398,7 @@ setInterval(function() {
 
 			$('#UFO').remove()
 
-			$('.hidden').css({"display" : "none"})
+			$('.hidden').css({ "display" : "none"})
 
 			alert('Defeated! Press x to replay')
 
@@ -645,6 +409,8 @@ setInterval(function() {
 })
 
 },1000/24)
+
+
 
 setInterval(function(){
 
@@ -774,192 +540,66 @@ setInterval(function(){
 
 
 setInterval(function(){ 
-
- $('.minion').each(function() {
-
- 		if (parseFloat($(this).css('top').replace('px','')) > 1200  ) {
-
+	$('.minion').each(function() {
+		if (parseFloat($(this).css('top').replace('px','')) > 1200  ) {
+				$(this).remove()
+				console.log('nothing')
+		}
+		var distance_h1 = $(this).offset().left - $('#UFO').offset().left
+		var distance_v2= $(this).offset().top - $('#UFO').offset().top
+		if (    (distance_h1 <= 35 &&
+				distance_h1 >= -35)&&
+				(distance_v2 <= 35 &&
+				distance_v2 >= -35 && 
+				$(this).hasClass('bounceOutDown')===false)) {
+			var $tick = $('#tick'+lifeUFO)
 			$(this).remove()
-			console.log('nothing')
+			$tick.toggle(1000)
+			lifeUFO --
+			if (lifeUFO === 0) {
+				$('#UFO').remove()
+				$('.hidden').css({"display" :'none' })
+				$('#logo').css({'display' : 'none'})
+				$('.textRestart').css({'display' : "block"})
+				$('#restart').css({'display' : 'block'})
+				$('#restart').on('click', function () {restart=false})
+			}
 		}
-
-
- 	
-
-
-	console.log('working')
-
-		
-
-
-		
-
-
-
-
-	var distance_h1 = $(this).offset().left - $('#UFO').offset().left
-	var distance_v2= $(this).offset().top - $('#UFO').offset().top
-
-	if ((distance_h1 <= 35   &&
-			 distance_h1 >= -35) &&
-			  (distance_v2 <= 35 &&
-			   distance_v2 >= -35 && $(this).hasClass('bounceOutDown')===false)) {
-
-		var $tick = $('#tick'+lifeUFO)
-
-		$(this).remove()
-
-
-
-
-
-		// $tick.addClass('animated')
-		// $tick.addClass('bounceOutUp')
-
-		$tick.toggle(1000)
-
-		lifeUFO --
-
-		if (lifeUFO===0) {
-
-			$('#UFO').remove()
-			alert('Defeated! Press x to replay')
-		}
-
-		
-		
-
-		}
-
-
-
-
-
-	
-
-
-	if ($('.missile').length > 0 ) {
-
-
-
-
-	
-
-	var distance_h = $(this).offset().left - $('.missile').offset().left
-	var distance_v= $(this).offset().top - $('.missile').offset().top
-
-	console.log(distance_v)
-	console.log(distance_h)
-
-		if ((distance_h <= 35   &&
-			 distance_h >= -35) &&
-			  (distance_v <= 35 &&
-			   distance_v >= -35)) {
-
-
-				console.log('does it work')
-
-
+		if ($('.missile').length > 0 ){
+			var distance_h = $(this).offset().left - $('.missile').offset().left
+			var distance_v= $(this).offset().top - $('.missile').offset().top
+			console.log(distance_v)
+			console.log(distance_h)
+			if ((distance_h <= 35   &&
+					 distance_h >= -35) &&
+					  (distance_v <= 35 &&
+					   distance_v >= -35)) {
 				$('.missile').remove()
-
 				hits ++
-
 				countA = countA + hits 
-
-
 				if (countA < 1) {
-
-				
-
-					
-
-
-				
-				$(this).addClass('animated')
-				$(this).addClass('infinite')
-
-				$(this).addClass('jello')
-
-
-			
-
-				
-
-				
-
-			
-				
-				count=count+hits
-
-				hits =0
-
-
-
-			
-
-
-
-				
-				$('div #counter').html('<p>' + count + '</p>')
-				
+					$(this).addClass('animated')
+					$(this).addClass('infinite')
+					$(this).addClass('jello')
+					count=count+hits
+					hits =0
+					$('div #counter').html('<p>' + count + '</p>')
 				} else {
-
 					var exp = new Audio("exp.mp3"); // buffers automatically when created
-
-
 					exp.play();
-
-
-
 					count=count+ hits
 					hits=0
 					countA=0
-
 					$('div #counter').html('<p>' + count + '</p>')
-
-					console.log('css !!')
-
 					$(this).removeClass('jello')
-
-					if (count===10) {
-
-						bossTime=1
-					}
-
-
-			
-				
-
+						if ( count === 10 ) {bossTime = 1}
 					$(this).css({'background-image': 'url("images/exp.png")'}).delay(200)
-
 					$(this).addClass('animated')
-
 					$(this).addClass('bounceOutDown')
-
-					// $(this).addClass('animated')
-
-					// $(this).addClass('flash')
-
-					// $(this).slideUp(200)
-
-					// setTimeout(function() {
-
-					// 	console.log('removing')
-					// animateDivV($this).stop()
-						// $(this).delay(2000).remove()
-						
-					// },1)
 				}
-
-
-
-	
 			}	
 		}
-
-
-})
-
+	})
 },1000/24)
 
 
@@ -970,129 +610,36 @@ setInterval(function(){
 
 
 
-setInterval (function (){
+	setInterval (function (){
 
 
 
-if ($('.missile').length >0 && parseFloat($('.missile').css('bottom').replace('px','')) > 600 ) {
-					$('.missile').remove() }
+	if ($('.missile').length >0 && parseFloat($('.missile').css('bottom').replace('px','')) > 600 ) {
+						$('.missile').remove() }
 
+	},1000/24)
 
-	
-		// var a = checkDistance($('#0'),lifeMinion)
-		
-		// var b = checkDistance($('#2'),lifeMinion)
-		// var c = checkDistance($('#3'),lifeMinion)
-		// checkDistance($('#4'),lifeMinion)
-		// checkDistance($('#5'),lifeMinion)
 
 
 
-			// checkDistance($('.minion')).each()
-},1000/24)
 
 
 
-// setInterval(function(){ 
-
-
-// for (var i =0 ; i<id+10 ; i++) {
-
-
-
-// 		setInterval( function(){
-// 			checkDistance($("'#"+i+ "'"))
-// 		},1000/24)
-	
-
-// }
-
-// },1000/24)
-
-
-
-// setInterval (function (){
- 
-// 	// checkDistance($('.bad'),lifeBad,countBad)
-// 	// checkDistance($('.minion'),lifeMinion)
-
-
-
-	
-// 		var a = checkDistance($('#1'),lifeMinion)
-		
-// 		var b = checkDistance($('#2'),lifeMinion)
-// 	},1000/24)
-
-
-
-
-
-// function checkMinion (enemy) {
-// 	setInterval (function() {
-// 		checkDistance(enemy,lifeMinion)
-// 	},1000/24)
-// }
-
-// checkMinion($('#0'))
-
-
-
-
-
-
-// setInterval(function(){
-
-// 	var a = checkDistance($('#0'),lifeMinion)
-// },1000/24)
-
-// setInterval(function(){
-
-// 	var a = checkDistance($('#1'),lifeMinion)
-// },1000/24)
-
-
-
-// setInterval(function(){
-
-// 	var a = checkDistance($('#2'),lifeMinion)
-// },1000/24)
-
-// setInterval(function(){
-
-// 	var a = checkDistance($('#3'),lifeMinion)
-// },1000/24)
-
-
-// setInterval(function(){
-
-// 	var a = checkDistance($('#4'),lifeMinion)
-// },1000/24)
-
-// setInterval(function(){
-
-// 	var a = checkDistance($('#5'),lifeMinion)
-// },1000/24)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-});
 
 
 
 
 
 })
+
+
+
+
+
+
+
+
+})
+
+
 
