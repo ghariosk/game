@@ -203,7 +203,8 @@ body {
 p {
 
 /*	position: absolute;*/
-	text-align: center
+	text-align: center; 
+	display : inline;
 
 }
 
@@ -303,7 +304,7 @@ p {
 	height:50px;
 	background-image:url('images/start.png');
 	position:fixed;
-	z-dinex:1;
+	z-index:1;
 	background-size:contain;
 	background-repeat: no-repeat;
 	left:25%;
@@ -354,6 +355,27 @@ p {
 
 
 
+}
+
+#script {
+	position:absolute;
+	width:400px;
+	height:600px;
+	background-color:none;
+	left:57%;
+	top:50%;
+	color: rgb(255, 255, 255);
+	text-shadow: 0 0 30px rgb(0, 200, 255);
+	font-family :Orbitron;
+	opacity:0.8;
+
+
+}
+
+li {
+	position:inline-block;
+	float:left;
+	list-style: none
 }
 
 

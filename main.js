@@ -17,20 +17,78 @@ var id ="0"
 var bossTime=0
 var restart = true
 
-var words1 = "Millions of light years away in the Galaxy of Sparta is under attack… "
+var words1 = "Millions of light years away, the Galaxy of Sparta is under attack… "
 var words2 = "The evil monkeys are attempting to invade your homespace in their flying saucers again. There are also rumours they have perfected their biological weapon, and created giant toxic octopuses that they now venerate as gods. Your job today, officer, is to eliminate as much of them as possible. Also try and take down these creatures they have made."
 var words3="Good luck!"
 
-var myArray1 = words1.split('')
-var myArray2 = words2.split('')
-var myArray3= words2.split('')
+var $myArray1 = words1.split('')
+var $myArray2 = words2.split('')
+var $myArray3= words2.split('')
 
-console.log(myArray1)
+
+var i = 0
+
+	var timer = setInterval( function(){ 
+			click = new Audio("click.mp3"); // buffers automatically when created
+			click.play();
+			$('#script').append('<p>'+ words1.charAt(i)+ '</p>' )
+		i++
+
+		if (i >= words1.length) clearInterval(timer); {
+			queue.processNextMessage()
+
+		}	
+		},90)
+
+
+	while (queue.waitForMessage()) {
+
+	var timer2 = setInterval( function(){ 
+			click = new Audio("click.mp3"); // buffers automatically when created
+			click.play();
+			$('#script').append('<p>'+ words2.charAt(i)+ '</p>' )
+		i++
+
+		if (i >= words1.length) clearInterval(timer); {
+
+		}	
+		},90)
+
+	}
+
+
+	// var timer3 = setInterval( function(){ 
+	// 		click = new Audio("click.mp3"); // buffers automatically when created
+	// 		click.play();
+	// 		$('#script').append('<p>'+ words3.charAt(i)+ '</p>' )
+	// 	i++
+
+	// 	if (i >= words1.length) clearInterval(timer); {
+
+	// 	}	
+	// 	},90)
+
+
+
+
+
+
+
+
+console.log($myArray1)
 
 
 
 
 $(function(){
+
+
+	
+
+		
+
+
+
 
 
 	console.log ('The dom is on!')
