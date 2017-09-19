@@ -1,4 +1,4 @@
- var count=10
+ var count=0
 var hits =0 
 
 var lifeBad = 5
@@ -18,6 +18,10 @@ var bossTime=0
 
 
 $(function(){
+
+
+$('#logo').addClass('animated')
+$('#logo').addClass('bounceInDown')
 
 
 function makeNewPosition(){
@@ -79,17 +83,20 @@ setInterval (function() {
 
 
 		laugh.play()
+		count=0
 
-		count=2.5
+		bossTime=1
 
-	} else if (count===2.5) {
+	} else if (bossTime===1) {
+
+
 
 
 	
 
 
 
-	} else {
+	} else if (bossTime===0) {
 
 	$('#main').append('<div class="minion bad2" id="'+id + '"> </div> ')
 	
@@ -538,15 +545,24 @@ setInterval(function() {
 			  (distance_v2 <= 35 &&
 			   distance_v2 >= -35)) {
 
+
+
 		var $tick = $('#tick'+lifeUFO)
 
-		$(this).remove()
+		$tick.delay(2000).fadeOut(3000)
+
+		// $(this).remove()
+
+		$tick.addClass('animated')
+
+		$tick.addClass('bounceOutUp')
 
 
 
 
 
-		$tick.remove()
+
+		// $tick.remove()
 
 		lifeUFO --
 
@@ -653,7 +669,7 @@ setInterval(function(){
 			
 				
 
-					$(this).css({'background-image': 'url("images/exp.png")'}).delay(200)
+					$(this).css({'background-image': 'url("images/exp.png")'})
 
 					// $(this).addClass('animated')
 
@@ -665,7 +681,9 @@ setInterval(function(){
 
 					// 	console.log('removing')
 					// animateDivV($this).stop()
-						$(this).remove()
+						$(this).delay(2000).remove()
+
+						bossTime=0
 						
 					// },1)
 				}
@@ -691,7 +709,7 @@ setInterval(function(){
 
  $('.minion').each(function() {
 
- 		if (parseFloat($(this).css('top').replace('px','')) > 1200 ) {
+ 		if (parseFloat($(this).css('top').replace('px','')) > 1200  ) {
 
 			$(this).remove()
 			console.log('nothing')
@@ -717,7 +735,7 @@ setInterval(function(){
 	if ((distance_h1 <= 35   &&
 			 distance_h1 >= -35) &&
 			  (distance_v2 <= 35 &&
-			   distance_v2 >= -35)) {
+			   distance_v2 >= -35 && $(this).hasClass('bounceOutDown')===false)) {
 
 		var $tick = $('#tick'+lifeUFO)
 
@@ -727,7 +745,10 @@ setInterval(function(){
 
 
 
-		$tick.remove()
+		// $tick.addClass('animated')
+		// $tick.addClass('bounceOutUp')
+
+		$tick.toggle(1000)
 
 		lifeUFO --
 
@@ -832,11 +853,20 @@ setInterval(function(){
 
 					$(this).removeClass('jello')
 
+					if (count===10) {
+
+						bossTime=1
+					}
+
 
 			
 				
 
 					$(this).css({'background-image': 'url("images/exp.png")'}).delay(200)
+
+					$(this).addClass('animated')
+
+					$(this).addClass('bounceOutDown')
 
 					// $(this).addClass('animated')
 
@@ -848,7 +878,7 @@ setInterval(function(){
 
 					// 	console.log('removing')
 					// animateDivV($this).stop()
-						$(this).remove()
+						// $(this).delay(2000).remove()
 						
 					// },1)
 				}

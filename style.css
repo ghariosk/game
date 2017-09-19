@@ -182,8 +182,8 @@ body {
 	background-color:grey;
 	border:1px solid grey;
 	/*font-family: serif;*/
-	position:absolute;
-	right:200px;
+	position:fixed;
+	right:20%;
 	top:75px;
 
 
@@ -280,5 +280,19 @@ p {
 	position:absolute;
 
 
+
+}
+
+
+#logo {
+	width:600px;
+	height:600px;
+	background-image:url('images/logo.png');
+	position:fixed;
+	z-index:1;
+	background-size: contain;
+	background-repeat: no-repeat;
+	left:32%;
+	top:30%;
 
 }
