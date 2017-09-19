@@ -20,8 +20,49 @@ var bossTime=0
 $(function(){
 
 
-$('#logo').addClass('animated')
-$('#logo').addClass('bounceInDown')
+	$.fn.extend({
+    animateCss: function (animationName) {
+        var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+        this.addClass('animated ' + animationName).one(animationEnd, function() {
+            $(this).removeClass('animated ' + animationName);
+        });
+        return this;
+    }
+});
+
+
+
+$('#logo').animateCss('bounceInDown')
+
+setTimeout ( function () {  
+
+$('#logo').animateCss('tada');
+
+},500)
+
+setTimeout(function () {
+
+$('#logo').animate({
+	left:'20px',
+
+	top:'50px',
+
+	width:'300px',
+	height:'200px'
+
+
+},500)
+
+},500)
+
+
+
+
+// $('#logo').addClass('bounceInDown')
+
+// $(#'logo').removeClass('animated')
+
+
 
 
 function makeNewPosition(){
