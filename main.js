@@ -3,7 +3,7 @@ var hits =0
 
 var lifeBad = 5
 var lifeMinion=1
-var lifeUFO=10
+var lifeUFO=3
 
 var countBad=0
 var countMinion=0
@@ -16,6 +16,8 @@ var id ="0"
 
 var bossTime=0
 var restart = true
+
+var upgrade = false
 
 var words1 = "Millions of light years away, the Galaxy of Sparta is under attack… "
 var words2 = "The evil monkeys are attempting to invade your homespace in their flying saucers again. There are also rumours they have perfected their biological weapon, and created giant toxic octopuses that they now venerate as gods. Your job today, officer, is to eliminate as much of them as possible. Also try and take down these creatures they have made."
@@ -31,6 +33,8 @@ var words10= "Set the keyboard repeat to fast ! "
 
 var i = 0
 var a=1
+
+// $('.missile')=$('.missile')
 
 	// var timer = setInterval( function(){ 
 	// 		// click = new Audio("click.mp3"); // buffers automatically when created
@@ -242,9 +246,10 @@ setInterval(function(){
 		// $('#script').css({'display' : 'block'})
 		$('#main').prepend('<div id="UFO"> </div> ')
 		$('#life').prepend('<div id="tick1"> </div> <div id="tick2"> </div> <div id="tick3"> </div>')
-		$('div #counter').html('<p>' + count + '</p>')
+		$('#counter').html('<p id="score">' + count + '</p>')
 		$('.bad2').remove()
 		$('.attack').remove()
+		upgrade=false
 
 
 		// spawn()
@@ -277,7 +282,7 @@ $start.on('click', function() {
 	$('#script').css({'display' : 'none'})
 	$('#instruction').css({'display' : 'none'})
 
-	setTimeout(function () {$('#logo').animate({left:'20px',top:'50px',width:'300px',height:'200px'},500)},50);
+	setTimeout(function () {$('#logo').animate({left:'2px',top:'50px',width:'300px',height:'200px'},500)},50);
 
 
 
@@ -445,24 +450,85 @@ $start.on('click', function() {
 		animateDivH($('.bad'))
 	},1000/24)
 
+
+
+
 	function launchMissile() {
+
+		// $('.missile')=$('.missile')
+
+		// $('.missile')=$('.missile')
+
+		
 
 		// if ( parseFloat($('.missile').css('bottom').replace('px','') < 350 )) {
 		// 	console.log('reloading')
 
+
+
+		 	
+
+		 
+
 		 if ($('.missile').length == 0) {
+
+		 	console.log('working')
+
 			var laser = new Audio("laser.mp3"); // buffers automatically when created
 			laser.play();
-			var b = $("#UFO").position().left
-			$('#main').append('<div class="missile"  </div>')
-			$('.missile').css({'left' : b + 23 } )
-			var $p = $('p')
-			$('.missile').animate({
-				bottom:'1000px'
 
-			},500)  
+			var b = $("#UFO").position().left
+
+			
+
+			$('#main').append("<div class='missile'> </div>")
+
+			 if (upgrade === true) {
+
+		 	
+		 		$('.missile').html('<div id="right"> </div> <div id="left"> </div>')
+		 		console.log('hey')
+		 		$('.missile').css({"width" : "30px"})
+		 		$('.missile').css({"background-color" : "transparent" , "box-shadow":"none" , "opacity" : "1"})
+				$('.missile').css({'left' :  b + 19  }) 
+
+				$('.missile').animate({
+					bottom:'1000px',
+
+				},250)
+
+		 	}	
+
+			$('.missile').css({'left' :  b + 23  }) 
+
+			
+
+			$('.missile').animate({
+				bottom:'1000px',
+
+			},500)
+
+
+
+
 		}
 	}
+
+
+
+
+// var laser = new Audio("laser.mp3"); // buffers automatically when created
+// 		laser.play();
+// 		var b = $("#UFO").position().left
+		
+// 		$('#main').append('<div class="missile"  </div>')
+// 		$('.missile').css({'left' : b + 23 } )
+// 		var $p = $('p')
+// 		$('.missile').animate({
+// 			bottom:'1000px'
+
+// 		},500)  
+
 
 	setInterval(function() {
 		$('.attack').each(function() {
@@ -520,6 +586,7 @@ $start.on('click', function() {
 						var exp = new Audio("exp.mp3"); // buffers automatically when created
 						exp.play();
 						count=count+ hits
+						if (count > 15 ) {upgrade=true}
 						hits=0
 						countA=0
 						$('div #counter').html('<p class="score">' + count + '</p>')
@@ -556,6 +623,7 @@ $start.on('click', function() {
 			$('#restart').css({'display' : 'block'})
 			$('#restart').on('click', function () {restart=false})
 			$('#script').css({'display' : "none"})
+			$('.textRestart').append('<p> Your final score is '+ count + '</p>' )
 		}
 	}
 
@@ -583,6 +651,7 @@ $start.on('click', function() {
 			if ($('.missile').length > 0 && $(this).hasClass('tomato') ==false)  {
 				var distance_h = $(this).offset().left - $('.missile').offset().left
 				var distance_v= $(this).offset().top - $('.missile').offset().top
+				console.log(distance_h)
 				if ((Math.abs(distance_h) <= 35) &&
 					 Math.abs(distance_v) <= 35) {
 					$('.missile').remove()
@@ -599,6 +668,7 @@ $start.on('click', function() {
 						var exp = new Audio("exp.mp3"); // buffers automatically when created
 						exp.play();
 						count=count+ hits
+						if (count > 15 ) {upgrade=true}
 						hits=0
 						countA=0
 						$('div #counter').html('<p class="score">' + count + '</p>')
@@ -614,7 +684,7 @@ $start.on('click', function() {
 
 		})
 
-	},1000/48)
+	},1000/100)
 
 	setInterval (function (){
 		if ($('.missile').length >0 && parseFloat($('.missile').css('bottom').replace('px','')) > 600 ) {
