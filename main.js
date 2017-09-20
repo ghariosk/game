@@ -20,59 +20,100 @@ var restart = true
 var words1 = "Millions of light years away, the Galaxy of Sparta is under attack… "
 var words2 = "The evil monkeys are attempting to invade your homespace in their flying saucers again. There are also rumours they have perfected their biological weapon, and created giant toxic octopuses that they now venerate as gods. Your job today, officer, is to eliminate as much of them as possible. Also try and take down these creatures they have made."
 var words3="Good luck!"
-var words4="Use the keyboard to navigate the spaceship :</p> <br> <p> a —> go left </p> <br> <p> d —> go right </p> <br>  <p> space —> fire </p>  <br> <p> To optimise performance : </p> <br> <p> Put the browser in full screen mode. </p> <br> <p>  Set the keyboard repeat to fast ! "
+var words4="Use the keyboard to navigate the spaceship :"
+var words5= "a —> go left "
+var words6= "d —> go right " 
+var words7= "space —> fire "
+var words8= "To optimise performance :"
+var words9= "Put the browser in full screen mode."
+var words10= "Set the keyboard repeat to fast ! "
 
 
 var i = 0
-var a=0
+var a=1
 
-	var timer = setInterval( function(){ 
-			// click = new Audio("click.mp3"); // buffers automatically when created
-			// click.play();
-			$('#script').append('<p>'+ words1.charAt(i)+ '</p>' )
-		i++
+	// var timer = setInterval( function(){ 
+	// 		// click = new Audio("click.mp3"); // buffers automatically when created
+	// 		// click.play();
+	// 		$('#script').append('<p>'+ words1.charAt(i)+ '</p>' )
+	// 	i++
 
-		if (i > words1.length) clearInterval(timer); {
-
-
-			if (i > words1.length) {
-				$('#script').append('<br><br>')
-			a=1
-			i=0}
-
-		}	
-		},90)
+	// 	if (i > words1.length) clearInterval(timer); {
 
 
+	// 		if (i > words1.length) {
+	// 			$('#script').append('<br><br>')
+	// 		a=1
+	// 		i=0}
 
+	// 	}	
+	// 	},90)
+
+
+	var typing = function (array,turn,clear) {
 	
-	var timer2 = setInterval( function(){ 
-		console.log('happening')
-
-		if (a===1) {
+		
+		if (turn===a) {
 
 			
 			// click = new Audio("click.mp3"); // buffers automatically when created
 			// click.play();
-			$('#script').append('<p>'+ words4.charAt(i)+ '</p>' )
-
+			$('#script').append('<p>'+ array.charAt(i)+ '</p>' )
 			i++
 
-			if (i >= words2.length) clearInterval(timer2); {
 
-				// $('#script').append('<br><br>')
-				// $('#script').append('<p>'+ words3.charAt(i)+ '</p>' )
+			if (i >= array.length) clearInterval(clear); {
 
+				if (i >= array.length) {
+						console.log('it works')
 
+					$('#script').append('<br><br>')
+					a=turn+1
+					i=0
+				}
 			}	
-
-		
 		} 
+	}
+
+
+
+
+
+
+
+	// typing(words2,2)
+	// typing(words3,3)
+
+
+
+	
+	// var timer2 = setInterval( function(){ 
+	// 	console.log('happening')
+
+	// 	if (a===1) {
+
+			
+	// 		// click = new Audio("click.mp3"); // buffers automatically when created
+	// 		// click.play();
+	// 		$('#script').append('<p>'+ words4.charAt(i)+ '</p>' )
+
+	// 		i++
+
+	// 		if (i >= words2.length) clearInterval(timer2); {
+
+	// 			// $('#script').append('<br><br>')
+	// 			// $('#script').append('<p>'+ words3.charAt(i)+ '</p>' )
+
+
+	// 		}	
+
+		
+	// 	} 
 
 		
 
 		
-		},90)
+	// 	},90)
 
 	
 
@@ -125,10 +166,53 @@ $(function(){
     	}
 	});
 
-$('#logo').animateCss('bounceInDown');
-$('#start').animateCss('bounceInLeft');
+	$('#logo').animateCss('bounceInDown');
 
-setTimeout ( function () {$('#logo').animateCss('tada')},500)
+	$('#start').animateCss('bounceInLeft');
+
+	$('#instruction').animateCss('bounceInRight');
+
+	setTimeout ( function () {$('#logo').animateCss('tada')},1500);
+
+
+	$('#instruction').on('click' , function () {
+
+		$('#instruction').css({'display' : "none"});
+		$('#script').slideDown();
+
+		var timer1 = setInterval( function () { typing(words1,1,timer1)}  , 45)
+
+		var timer2 = setInterval ( function () {typing (words2, 2 , timer2 )} , 45)
+
+		var timer3 = setInterval (function () {typing(words3, 3 , timer3 )}, 45)
+
+		var timer4 = setInterval( function () { typing(words4,4,timer4)}  , 45)
+
+		var timer5 = setInterval ( function () {typing (words5, 5 , timer5 )} , 45)
+
+		var timer6 = setInterval (function () {typing(words6, 6 , timer6 )}, 45)
+
+		var timer7 = setInterval( function () { typing(words7,7,timer7)}  , 45)
+
+		var timer8 = setInterval ( function () {typing (words8, 8 , timer8 )} , 45)
+
+		var timer9 = setInterval (function () {typing(words9, 9 , timer9 )}, 45)
+
+		var timer10 = setInterval (function () {typing(words10,10,timer10)} , 45)
+
+	})
+
+
+	$('#script').on('click', function() {
+		$(this).slideUp(50)
+
+		setTimeout(function (){ 
+
+
+		$('#instruction').css({'display' : "block"})
+
+	   },300)
+	})
 
 
 
@@ -191,8 +275,10 @@ $start.on('click', function() {
 	$('#start').css({"display" : "none"});
 	$('.hidden').css({"display" :'block' });
 	$('#script').css({'display' : 'none'})
+	$('#instruction').css({'display' : 'none'})
 
 	setTimeout(function () {$('#logo').animate({left:'20px',top:'50px',width:'300px',height:'200px'},500)},50);
+
 
 
 
@@ -429,14 +515,14 @@ $start.on('click', function() {
 						$(this).addClass('jello')
 						count=count+hits
 						hits =0
-						$('div #counter').html('<p>' + count + '</p>')
+						$('div #counter').html('<p class="score">' + count + '</p>')
 					} else {
 						var exp = new Audio("exp.mp3"); // buffers automatically when created
 						exp.play();
 						count=count+ hits
 						hits=0
 						countA=0
-						$('div #counter').html('<p>' + count + '</p>')
+						$('div #counter').html('<p class="score">' + count + '</p>')
 						console.log('css !!')
 						$(this).removeClass('jello')
 						$(this).css({'background-image': 'url("images/exp.png")'})
@@ -508,14 +594,14 @@ $start.on('click', function() {
 						$(this).addClass('jello')
 						count=count+hits
 						hits =0
-						$('div #counter').html('<p>' + count + '</p>')
+						$('div #counter').html('<p class="score">' + count + '</p>')
 					} else {
 						var exp = new Audio("exp.mp3"); // buffers automatically when created
 						exp.play();
 						count=count+ hits
 						hits=0
 						countA=0
-						$('div #counter').html('<p>' + count + '</p>')
+						$('div #counter').html('<p class="score">' + count + '</p>')
 						$(this).removeClass('jello')
 						$(this).css({'background-image': 'url("images/exp.png")'})
 						$(this).addClass('tomato')
