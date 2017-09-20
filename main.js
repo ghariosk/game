@@ -3,7 +3,7 @@ var hits =0
 
 var lifeBad = 5
 var lifeMinion=1
-var lifeUFO=3
+var lifeUFO=10
 
 var countBad=0
 var countMinion=0
@@ -20,41 +20,62 @@ var restart = true
 var words1 = "Millions of light years away, the Galaxy of Sparta is under attack… "
 var words2 = "The evil monkeys are attempting to invade your homespace in their flying saucers again. There are also rumours they have perfected their biological weapon, and created giant toxic octopuses that they now venerate as gods. Your job today, officer, is to eliminate as much of them as possible. Also try and take down these creatures they have made."
 var words3="Good luck!"
-
-var $myArray1 = words1.split('')
-var $myArray2 = words2.split('')
-var $myArray3= words2.split('')
+var words4="Use the keyboard to navigate the spaceship :</p> <br> <p> a —> go left </p> <br> <p> d —> go right </p> <br>  <p> space —> fire </p>  <br> <p> To optimise performance : </p> <br> <p> Put the browser in full screen mode. </p> <br> <p>  Set the keyboard repeat to fast ! "
 
 
 var i = 0
+var a=0
 
 	var timer = setInterval( function(){ 
-			click = new Audio("click.mp3"); // buffers automatically when created
-			click.play();
+			// click = new Audio("click.mp3"); // buffers automatically when created
+			// click.play();
 			$('#script').append('<p>'+ words1.charAt(i)+ '</p>' )
 		i++
 
-		if (i >= words1.length) clearInterval(timer); {
-			queue.processNextMessage()
+		if (i > words1.length) clearInterval(timer); {
+
+
+			if (i > words1.length) {
+				$('#script').append('<br><br>')
+			a=1
+			i=0}
 
 		}	
 		},90)
 
 
-	while (queue.waitForMessage()) {
 
+	
 	var timer2 = setInterval( function(){ 
-			click = new Audio("click.mp3"); // buffers automatically when created
-			click.play();
-			$('#script').append('<p>'+ words2.charAt(i)+ '</p>' )
-		i++
+		console.log('happening')
 
-		if (i >= words1.length) clearInterval(timer); {
+		if (a===1) {
 
-		}	
+			
+			// click = new Audio("click.mp3"); // buffers automatically when created
+			// click.play();
+			$('#script').append('<p>'+ words4.charAt(i)+ '</p>' )
+
+			i++
+
+			if (i >= words2.length) clearInterval(timer2); {
+
+				// $('#script').append('<br><br>')
+				// $('#script').append('<p>'+ words3.charAt(i)+ '</p>' )
+
+
+			}	
+
+		
+		} 
+
+		
+
+		
 		},90)
 
-	}
+	
+
 
 
 	// var timer3 = setInterval( function(){ 
@@ -75,7 +96,7 @@ var i = 0
 
 
 
-console.log($myArray1)
+// console.log($myArray1)
 
 
 
@@ -117,14 +138,6 @@ $start=$('#start')
 
 setInterval(function(){
 	if (restart===false) {
-		$('#start').off()
-		$('.hidden').css({"display" :'block' })
-		$('#restart').css({'display' : 'none'})
-		$('.textRestart').css({'display' : 'none' })
-		$('#logo').css({'display' : 'block'})
-		$('#main').prepend('<div id="UFO"> </div> ')
-		$('#life').prepend('<div id="tick1"> </div> <div id="tick2"> </div> <div id="tick3"> </div>')
-		$('div #counter').html('<p>' + count + '</p>')
 
 		hits =0 
 		lifeBad = 5
@@ -137,13 +150,47 @@ setInterval(function(){
 		bossTime=0
 		restart = true
 		count=0
+		$('#start').off()
+		$('.hidden').css({"display" :'block' })
+		$('#restart').css({'display' : 'none'})
+		$('.textRestart').css({'display' : 'none' })
+		$('#logo').css({'display' : 'block'})
+		// $('#script').css({'display' : 'block'})
+		$('#main').prepend('<div id="UFO"> </div> ')
+		$('#life').prepend('<div id="tick1"> </div> <div id="tick2"> </div> <div id="tick3"> </div>')
+		$('div #counter').html('<p>' + count + '</p>')
+		$('.bad2').remove()
+		$('.attack').remove()
+
+
+		// spawn()
+
+	var spawn = setInterval (function() {
+		if (count%10 >= 0 && count >= 10 && bossTime ==2 ) {
+			$('#main').append('<div class="bad bad2"> </div>')
+			var laugh = new Audio("laugh.mp3"); // buffers automatically when created
+			laugh.play()
+			bossTime=1
+		} else if (bossTime===1) {//nothing
+		} else if (bossTime===0) {
+			$('#main').append('<div class="minion bad2" id="'+id + '"> </div> ')
+			id ++
+			return id
+		}
+	},4000)
+
+
+
 	}
 },1000/24)
+
+
 
 
 $start.on('click', function() {
 	$('#start').css({"display" : "none"});
 	$('.hidden').css({"display" :'block' });
+	$('#script').css({'display' : 'none'})
 
 	setTimeout(function () {$('#logo').animate({left:'20px',top:'50px',width:'300px',height:'200px'},500)},50);
 
@@ -178,8 +225,8 @@ $start.on('click', function() {
 	    });
 	};
 
-	setInterval (function() {
-		if (count%10===0 && count!==0) {
+	var spawn = setInterval (function() {
+		if (count%10 >= 0 && count >= 10 && bossTime ==2 ) {
 			$('#main').append('<div class="bad bad2"> </div>')
 			var laugh = new Audio("laugh.mp3"); // buffers automatically when created
 			laugh.play()
@@ -196,7 +243,7 @@ $start.on('click', function() {
 	setInterval(function(){
 
 		animateDivH($('.bad'))
-		animateDivV($('.minion'))
+		// animateDivV($('.minion'))
 
 	},1000/24)
 
@@ -313,16 +360,22 @@ $start.on('click', function() {
 	},1000/24)
 
 	function launchMissile() {
-		var laser = new Audio("laser.mp3"); // buffers automatically when created
-		laser.play();
-		var b = $("#UFO").position().left
-		$('#main').append('<div class="missile"  </div>')
-		$('.missile').css({'left' : b + 23 } )
-		var $p = $('p')
-		$('.missile').animate({
-			bottom:'1000px'
 
-		},500)  
+		// if ( parseFloat($('.missile').css('bottom').replace('px','') < 350 )) {
+		// 	console.log('reloading')
+
+		 if ($('.missile').length == 0) {
+			var laser = new Audio("laser.mp3"); // buffers automatically when created
+			laser.play();
+			var b = $("#UFO").position().left
+			$('#main').append('<div class="missile"  </div>')
+			$('.missile').css({'left' : b + 23 } )
+			var $p = $('p')
+			$('.missile').animate({
+				bottom:'1000px'
+
+			},500)  
+		}
 	}
 
 	setInterval(function() {
@@ -345,11 +398,11 @@ $start.on('click', function() {
 				lifeUFO --
 				if (lifeUFO===0) {
 
-					$('#UFO').remove()
+		
 
-					$('.hidden').css({ "display" : "none"})
 
 					alert('Defeated! Press x to replay')
+					youLose()
 				}
 			}	
 		})
@@ -362,12 +415,10 @@ $start.on('click', function() {
 			if ($('.missile').length > 0 ) {
 				var distance_h = $(this).offset().left - $('.missile').offset().left
 				var distance_v= $(this).offset().top - $('.missile').offset().top
-				console.log(distance_v)
-				console.log(distance_h)
-				if ((distance_h <= 100   &&
-				 distance_h >= -100) &&
-				  (distance_v <= 100 &&
-				   distance_v >= -100)) {
+			
+				if (Math.abs(distance_h) <= 100   &&
+				
+				  Math.abs(distance_v) <= 100 ) {
 					console.log('does it work')
 					$('.missile').remove()
 					hits ++
@@ -408,68 +459,76 @@ $start.on('click', function() {
 		})
 	},1000/24)
 
+
+	var youLose = function () {
+		if (lifeUFO === 0) {
+			clearInterval(spawn)
+			$('#UFO').remove()
+			$('.hidden').css({"display" :'none' })
+			$('#logo').css({'display' : 'none'})
+			$('.textRestart').css({'display' : "block"})
+			$('#restart').css({'display' : 'block'})
+			$('#restart').on('click', function () {restart=false})
+			$('#script').css({'display' : "none"})
+		}
+	}
+
 	setInterval(function(){ 
-							$('.minion').each(function() {
-								if (parseFloat($(this).css('top').replace('px','')) > 1200  ) {
-										$(this).remove()
-										console.log('nothing')
-								}
-								var distance_h1 = $(this).offset().left - $('#UFO').offset().left
-								var distance_v2= $(this).offset().top - $('#UFO').offset().top
-								if (    (distance_h1 <= 35 &&
-										distance_h1 >= -35)&&
-										(distance_v2 <= 35 &&
-										distance_v2 >= -35 && 
-										$(this).hasClass('bounceOutDown')===false)) {
-									var $tick = $('#tick'+lifeUFO)
-									$(this).remove()
-									$tick.toggle(1000)
-									lifeUFO --
-									if (lifeUFO === 0) {
-										$('#UFO').remove()
-										$('.hidden').css({"display" :'none' })
-										$('#logo').css({'display' : 'none'})
-										$('.textRestart').css({'display' : "block"})
-										$('#restart').css({'display' : 'block'})
-										$('#restart').on('click', function () {restart=false})
-									}
-								}
-								if ($('.missile').length > 0 ){
-									var distance_h = $(this).offset().left - $('.missile').offset().left
-									var distance_v= $(this).offset().top - $('.missile').offset().top
-									console.log(distance_v)
-									console.log(distance_h)
-									if ((distance_h <= 35   &&
-											 distance_h >= -35) &&
-											  (distance_v <= 35 &&
-											   distance_v >= -35)) {
-										$('.missile').remove()
-										hits ++
-										countA = countA + hits 
-										if (countA < 1) {
-											$(this).addClass('animated')
-											$(this).addClass('infinite')
-											$(this).addClass('jello')
-											count=count+hits
-											hits =0
-											$('div #counter').html('<p>' + count + '</p>')
-										} else {
-											var exp = new Audio("exp.mp3"); // buffers automatically when created
-											exp.play();
-											count=count+ hits
-											hits=0
-											countA=0
-											$('div #counter').html('<p>' + count + '</p>')
-											$(this).removeClass('jello')
-												if ( count === 10 ) {bossTime = 1}
-											$(this).css({'background-image': 'url("images/exp.png")'}).delay(200)
-											$(this).addClass('animated')
-											$(this).addClass('bounceOutDown')
-										}
-									}	
-								}
-							})
-	},1000/24)
+
+		var hit ="url('file:///Users/tech-a44/homework/game/images/exp.png')"
+		$('.minion').each(function() {
+			if (parseFloat($(this).css('top').replace('px','')) > 1200  ) {
+					$(this).remove()
+					console.log('nothing')
+			}
+			var distance_h1 = $(this).offset().left - $('#UFO').offset().left
+			var distance_v2= $(this).offset().top - $('#UFO').offset().top
+			if (    (distance_h1 <= 35 &&
+					distance_h1 >= -35)&&
+					(distance_v2 <= 35 &&
+					distance_v2 >= -35 && 
+					$(this).hasClass('bounceOutDown')===false)) {
+				var $tick = $('#tick'+lifeUFO)
+				$(this).remove()
+				$tick.toggle(1000)
+				lifeUFO --
+				youLose()
+			}
+			if ($('.missile').length > 0 && $(this).hasClass('tomato') ==false)  {
+				var distance_h = $(this).offset().left - $('.missile').offset().left
+				var distance_v= $(this).offset().top - $('.missile').offset().top
+				if ((Math.abs(distance_h) <= 35) &&
+					 Math.abs(distance_v) <= 35) {
+					$('.missile').remove()
+					hits ++
+					countA = countA + hits 
+					if (countA < 1) {
+						$(this).addClass('animated')
+						$(this).addClass('infinite')
+						$(this).addClass('jello')
+						count=count+hits
+						hits =0
+						$('div #counter').html('<p>' + count + '</p>')
+					} else {
+						var exp = new Audio("exp.mp3"); // buffers automatically when created
+						exp.play();
+						count=count+ hits
+						hits=0
+						countA=0
+						$('div #counter').html('<p>' + count + '</p>')
+						$(this).removeClass('jello')
+						$(this).css({'background-image': 'url("images/exp.png")'})
+						$(this).addClass('tomato')
+						$(this).addClass('animated')
+						$(this).addClass('bounceOutDown')
+						if (count%10===0 && count!=0) {bossTime=2}
+					}
+				}
+			}
+
+		})
+
+	},1000/48)
 
 	setInterval (function (){
 		if ($('.missile').length >0 && parseFloat($('.missile').css('bottom').replace('px','')) > 600 ) {
