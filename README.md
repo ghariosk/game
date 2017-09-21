@@ -1,11 +1,11 @@
-#Sparta Invader README
+# Sparta Invader README
 
 
 Sparta Invader 1.0 is a single page game built using JQuery.
 
 -------------------------------------------------
 
-##Purpose
+## Purpose
 
 This is a game built completely with basic **HTML**, **CSS** and **Javascript** functions. It will be responsive to most PC browsers but has been optimized for Chrome.
 
@@ -13,11 +13,11 @@ It is intented as a showcase for the developper's skills in the above mentionned
 
 This game is a work in progress and will be updated at the developper's discretion.
 
-##Functionality 
+## Functionality 
 
 This game is based on Space Invaders, respecting the classical format but with personalised graphics and progess tree.
 
-##Implementation
+## Implementation
 
 The functionality has been implmented using the following features:
 
@@ -27,9 +27,9 @@ The functionality has been implmented using the following features:
 * HTML 5
 * Animate.CSS
 
-##Usage
+## Usage
 
-###Running
+### Running
 
 * Visit the following web page in your browser: Webpage.
 
@@ -41,13 +41,13 @@ The functionality has been implmented using the following features:
 
 
 
-###Customising 
+### Customising 
 
 Set the keyboard repeat to fast and and the browser to full screen.
 
 
 
 
-# Heading 1
+
 
 
