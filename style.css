@@ -265,7 +265,7 @@ body {
 	background-size: contain;
 	background-repeat: no-repeat;
 	left:32%;
-	top:30%;
+	top:9%;
 
 
 
@@ -281,7 +281,7 @@ body {
 	background-size:contain;
 	background-repeat: no-repeat;
 	left:45%;
-	top:50%;
+	top:29%;
 	border-radius:3px ;
 	
 	background-position: center;
@@ -338,7 +338,7 @@ body {
 	width:891px;
 	height:358px;
 	left:17%;
-	top:57%;
+	top:41%;
 	color: rgb(255, 255, 255);
 	text-shadow: 0 0 30px rgb(0, 200, 255);
 	font-family :Orbitron;
@@ -396,8 +396,8 @@ scriptDown {
 	z-index:1;
 	background-size:contain;
 	background-repeat: no-repeat;
-	left:36%;
-	top:70%;
+	left:37%;
+	top:50%;
 	border-radius:3px ;
 	background-position: center;
 

@@ -21,6 +21,10 @@ var bossTime=0
 var restart = true
 
 var upgrade = false
+lost=false
+
+
+var spawn
 
 var words1 = "Millions of light years away, the Galaxy of Sparta is under attack… "
 var words2 = "The evil monkeys are attempting to invade your homespace in their flying saucers again. There are also rumours they have perfected their biological weapon, and created giant toxic octopuses that they now venerate as gods. Your job today, officer, is to eliminate as much of them as possible. Also try and take down these creatures they have made."
@@ -146,45 +150,47 @@ console.log(foo)
 
 	setTimeout ( function () {$('#logo').animateCss('tada')},1500);
 
+	var script = function () {
+
+			var timer1 = setInterval( function () { typing(words1,1,timer1)}  , 45)
+
+			var timer2 = setInterval ( function () {typing (words2, 2 , timer2 )} , 45)
+
+			var timer3 = setInterval (function () {typing(words3, 3 , timer3 )}, 45)
+
+			var timer4 = setInterval( function () { typing(words4,4,timer4)}  , 45)
+
+			var timer5 = setInterval ( function () {typing (words5, 5 , timer5 )} , 45)
+
+			var timer6 = setInterval (function () {typing(words6, 6 , timer6 )}, 45)
+
+			var timer7 = setInterval( function () { typing(words7,7,timer7)}  , 45)
+
+			var timer8 = setInterval ( function () {typing (words8, 8 , timer8 )} , 45)
+
+			var timer9 = setInterval (function () {typing(words9, 9 , timer9 )}, 45)
+
+			var timer10 = setInterval (function () {typing(words10, 10 ,timer10)} , 45)
+	}
 
 	$('#instruction').on('click' , function () {
-
-		$('#instruction').css({'display' : "none"});
-		$('#script').slideDown();
-
-		var timer1 = setInterval( function () { typing(words1,1,timer1)}  , 45)
-
-		var timer2 = setInterval ( function () {typing (words2, 2 , timer2 )} , 45)
-
-		var timer3 = setInterval (function () {typing(words3, 3 , timer3 )}, 45)
-
-		var timer4 = setInterval( function () { typing(words4,4,timer4)}  , 45)
-
-		var timer5 = setInterval ( function () {typing (words5, 5 , timer5 )} , 45)
-
-		var timer6 = setInterval (function () {typing(words6, 6 , timer6 )}, 45)
-
-		var timer7 = setInterval( function () { typing(words7,7,timer7)}  , 45)
-
-		var timer8 = setInterval ( function () {typing (words8, 8 , timer8 )} , 45)
-
-		var timer9 = setInterval (function () {typing(words9, 9 , timer9 )}, 45)
-
-		var timer10 = setInterval (function () {typing(words10,10,timer10)} , 45)
-
+			$('#instruction').css({'display' : "none"});
+			$('#script').slideDown();
+			script()
+			script = false
 	})
 
 
-	$('#script').on('click', function() {
-		$(this).slideUp(50)
+	// $('#script').on('click', function() {
+	// 	$(this).slideUp(50)
 
-		setTimeout(function (){ 
+	// 	setTimeout(function (){ 
 
 
-		$('#instruction').css({'display' : "block"})
+	// 	$('#instruction').css({'display' : "block"})
 
-	   },300)
-	})
+	//    },300)
+	// })
 
 
 
@@ -220,27 +226,7 @@ setInterval(function(){
 		$('.bad2').remove()
 		$('.attack').remove()
 		upgrade=false
-
-
-
-		// spawn()
-
-	var spawn = setInterval (function() {
-		if (count%10 >= 0 && count >= 10 && bossTime ==2 ) {
-			$('#main').append('<div class="bad bad2"> </div>')
-			var laugh = new Audio("laugh.mp3"); // buffers automatically when created
-			laugh.play()
-			bossTime=1
-		} else if (bossTime===1) {//nothing
-		} else if (bossTime===0) {
-			$('#main').append('<div class="minion bad2" id="'+id + '"> </div> ')
-			id ++
-			return id
-		}
-	},4000)
-
-
-
+		lost=false
 	}
 },1000/24)
 
@@ -249,14 +235,23 @@ setInterval(function(){
 
 $start.on('click', function() {
 
+	$('#script').on('click', function() {
+		$('#script').slideUp(50)
+
+		// setTimeout(function (){ 
+
+
+		// $('#instruction').css({'display' : "block"})
+
+	 //   },300)
+	})
 
 
 
 
+	if ( script !== false ) {script()}
 
 
-
- 
 
 
 
@@ -271,6 +266,22 @@ $start.on('click', function() {
 		'height' : '600px',
 
 	},250)
+
+
+
+	$('#script').on('click', function() {
+
+		console.log('working')
+		$(this).slideUp(50)
+
+		setTimeout(function (){ 
+
+
+		// $('#instruction').css({'display' : "block"})
+
+	   },300)
+	})
+
 
 
 	$('#instruction').css({'display' : 'none'})
@@ -313,6 +324,7 @@ $start.on('click', function() {
 	};
 
 	var spawn = setInterval (function() {
+		if (lost == false )
 		if (count%10 >= 0 && count >= 10 && bossTime ==2 ) {
 			$('#main').append('<div class="bad bad2"> </div>')
 			var laugh = new Audio("laugh.mp3"); // buffers automatically when created
@@ -611,7 +623,8 @@ $start.on('click', function() {
 
 	var youLose = function () {
 		if (lifeUFO === 0) {
-			clearInterval(spawn)
+
+			// clearInterval(spawn)
 			$('#UFO').remove()
 			$('.hidden').css({"display" :'none' })
 			$('#logo').css({'display' : 'none'})
@@ -620,6 +633,7 @@ $start.on('click', function() {
 			$('#restart').on('click', function () {restart=false})
 			$('#script').css({'display' : "none"})
 			$('.textRestart').append('<p id="scoreCount"> Your final score is '+ count + '</p>' )
+			var lost = true
 
 
 			cheval = highscore.toString() + " -->" + count.toString() ;
