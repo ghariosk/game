@@ -27,16 +27,9 @@ body {
 
 }
 
-.upgradeLaser {
-	width:30px;
-	height:100px;
-	z-index:1;
-	bottom:12%;
-	left:90px;
-	position:absolute;
-	
 
-}
+
+
 
 #left {
 	width:2px;
@@ -67,7 +60,6 @@ body {
 	background-image:url('images/spaceship.png');
 	width :50px;
 	height : 70px;
-	/*background-color:white;*/
 	background-size: contain;
 	background-repeat: no-repeat;
 	
@@ -87,7 +79,7 @@ body {
 	width :600px;
 	height:690px;
 	/*background-color:red;*/
-/*	margin:0 auto;*/
+	margin:0 auto;
 	position:relative;
 /*	position:absolute;*/
 	border:1px solid white;
@@ -95,10 +87,11 @@ body {
 	background-size : ;
 	background-repeat:no-repeat;
 	background-size: 1500px 800px;
-	display :inline-block;
+
 	overflow:hidden;
 	box-shadow: 0 0 30px rgb(0, 200, 255);
 	border-radius:5px;
+	z-index:0;
 
 
 
@@ -149,65 +142,6 @@ body {
 
 
 
-
-#box-left{
-	width:300px;
-	height:700px;
-	display:inline-block;
-	/*position:absolute;*/
-
-
-
-}
-
-#box-right {
-	width:100px;
-	height:700px ;
-	display:inline-block;
-	position:fixed;
-	background-color:red;
-	/*position:absolute;*/
-/*	right:0;*/
-
-
-
-}
-
-#box-up {
-	width:auto;
-	height:5px;
-	/*display:inline-block;*/
-/*	position:absolute;*/
-	/*margin :auto;
-*/
-
-}
-
-#box-down {
-	width:auto;
-	height:auto;
-	position:absolute;
-	/*display:inline-block;*/
-	z-index:0;
-} 
-
-.cover {
-/*	background-color:black;*/
-	positon:relative;
-	z-index:2;
-	/*position:absolute;*/
-}
-
-#essais {
-	height:20px;
-	width:20px;
-	background-color:red;
-	position: absolute ;
-	left:50%;
-	top:50%;
-	z-index:-1;
-}
-
 #counter {
 	width:200px;
 	height:50px;
@@ -215,7 +149,7 @@ body {
 	border:3px solid rgb(255, 255, 255);
 	border-radius:4px;
 	position:fixed;
-	right:20%;
+	right:6%;
 	top:75px;
 	margin: -20px 0 0 -20px;
 	/*font-family: "Bank Gothic", "Futura", "Arial";*/
@@ -346,7 +280,7 @@ body {
 	z-index:1;
 	background-size:contain;
 	background-repeat: no-repeat;
-	left:25%;
+	left:45%;
 	top:50%;
 	border-radius:3px ;
 	
@@ -401,11 +335,10 @@ body {
 
 #script {
 	position:absolute;
-	width:400px;
-	height:437px;
-	background-color:none;
-	left:57%;
-	top:43%;
+	width:891px;
+	height:358px;
+	left:17%;
+	top:57%;
 	color: rgb(255, 255, 255);
 	text-shadow: 0 0 30px rgb(0, 200, 255);
 	font-family :Orbitron;
@@ -463,13 +396,44 @@ scriptDown {
 	z-index:1;
 	background-size:contain;
 	background-repeat: no-repeat;
-	left:60%;
-	top:50%;
+	left:36%;
+	top:70%;
 	border-radius:3px ;
 	background-position: center;
 
 	border:1px solid rgb(255, 255, 255);
 	box-shadow: 0 0 30px rgb(0, 200, 255);
+
+
+}
+
+form {
+
+/*	display:none;*/
+	
+
+	width:200px;
+
+
+}
+
+#highscore {
+
+	width:100px;
+
+	background-color:#263b42;
+
+	height:25px;
+	text-shadow: 0 0 30px rgb(0, 200, 255);
+	font-family :Orbitron;
+	opacity:0.8;
+	background-color:#263b42;
+	
+
+	padding:5px;
+	border:3px solid rgb(255, 255, 255);
+	border-radius:4px;
+		color: rgb(255, 255, 255);
 
 
 }

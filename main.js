@@ -10,6 +10,9 @@ var countMinion=0
 
 var countA=0
 
+var cheval
+var highscore=3
+
 
 
 var id ="0"
@@ -34,24 +37,6 @@ var words10= "Set the keyboard repeat to fast ! "
 var i = 0
 var a=1
 
-// $('.missile')=$('.missile')
-
-	// var timer = setInterval( function(){ 
-	// 		// click = new Audio("click.mp3"); // buffers automatically when created
-	// 		// click.play();
-	// 		$('#script').append('<p>'+ words1.charAt(i)+ '</p>' )
-	// 	i++
-
-	// 	if (i > words1.length) clearInterval(timer); {
-
-
-	// 		if (i > words1.length) {
-	// 			$('#script').append('<br><br>')
-	// 		a=1
-	// 		i=0}
-
-	// 	}	
-	// 	},90)
 
 
 	var typing = function (array,turn,clear) {
@@ -60,8 +45,8 @@ var a=1
 		if (turn===a) {
 
 			
-			// click = new Audio("click.mp3"); // buffers automatically when created
-			// click.play();
+			click = new Audio("click.mp3"); // buffers automatically when created
+			click.play();
 			$('#script').append('<p>'+ array.charAt(i)+ '</p>' )
 			i++
 
@@ -81,72 +66,55 @@ var a=1
 
 
 
-
-
-
-
-	// typing(words2,2)
-	// typing(words3,3)
-
-
-
-	
-	// var timer2 = setInterval( function(){ 
-	// 	console.log('happening')
-
-	// 	if (a===1) {
-
-			
-	// 		// click = new Audio("click.mp3"); // buffers automatically when created
-	// 		// click.play();
-	// 		$('#script').append('<p>'+ words4.charAt(i)+ '</p>' )
-
-	// 		i++
-
-	// 		if (i >= words2.length) clearInterval(timer2); {
-
-	// 			// $('#script').append('<br><br>')
-	// 			// $('#script').append('<p>'+ words3.charAt(i)+ '</p>' )
-
-
-	// 		}	
-
-		
-	// 	} 
-
-		
-
-		
-	// 	},90)
-
-	
-
-
-
-	// var timer3 = setInterval( function(){ 
-	// 		click = new Audio("click.mp3"); // buffers automatically when created
-	// 		click.play();
-	// 		$('#script').append('<p>'+ words3.charAt(i)+ '</p>' )
-	// 	i++
-
-	// 	if (i >= words1.length) clearInterval(timer); {
-
-	// 	}	
-	// 	},90)
-
-
-
-
-
-
-
-
-// console.log($myArray1)
-
-
-
-
 $(function(){
+
+
+
+
+
+
+
+var highscore
+
+
+
+$('form').submit(function (e) {
+
+	highscore = $('#highscore').val();
+
+	e.preventDefault()
+
+
+	console.log(highscore)
+})
+
+
+
+
+
+
+
+setInterval( function () { 
+
+
+
+
+
+
+
+
+
+
+},250) 
+
+
+
+
+var foo
+
+
+
+console.log(foo)
 
 
 	
@@ -221,7 +189,7 @@ $(function(){
 
 
 
-$start=$('#start')
+	$start=$('#start')
 
 
 setInterval(function(){
@@ -238,6 +206,8 @@ setInterval(function(){
 		bossTime=0
 		restart = true
 		count=0
+		$('#script').css({'display' : 'block'})
+		$('.textRestart #scoreCount').remove()
 		$('#start').off()
 		$('.hidden').css({"display" :'block' })
 		$('#restart').css({'display' : 'none'})
@@ -246,10 +216,11 @@ setInterval(function(){
 		// $('#script').css({'display' : 'block'})
 		$('#main').prepend('<div id="UFO"> </div> ')
 		$('#life').prepend('<div id="tick1"> </div> <div id="tick2"> </div> <div id="tick3"> </div>')
-		$('#counter').html('<p id="score">' + count + '</p>')
+		$('#counter').html('<p class="score">' + count + '</p>')
 		$('.bad2').remove()
 		$('.attack').remove()
 		upgrade=false
+
 
 
 		// spawn()
@@ -277,10 +248,35 @@ setInterval(function(){
 
 
 $start.on('click', function() {
+
+
+
+
+
+
+
+
+ 
+
+
+
 	$('#start').css({"display" : "none"});
 	$('.hidden').css({"display" :'block' });
-	$('#script').css({'display' : 'none'})
+	$('#script').css({'display' : 'block'})
+
+	$('#script').animate({
+		'left' : '6px',
+		'top'  : '100px' ,
+		'width'  : '260px' , 
+		'height' : '600px',
+
+	},250)
+
+
 	$('#instruction').css({'display' : 'none'})
+
+	$('#UFO').animateCss('bounceInUp')
+
 
 	setTimeout(function () {$('#logo').animate({left:'2px',top:'50px',width:'300px',height:'200px'},500)},50);
 
@@ -334,7 +330,7 @@ $start.on('click', function() {
 	setInterval(function(){
 
 		animateDivH($('.bad'))
-		// animateDivV($('.minion'))
+		animateDivV($('.minion'))
 
 	},1000/24)
 
@@ -623,7 +619,14 @@ $start.on('click', function() {
 			$('#restart').css({'display' : 'block'})
 			$('#restart').on('click', function () {restart=false})
 			$('#script').css({'display' : "none"})
-			$('.textRestart').append('<p> Your final score is '+ count + '</p>' )
+			$('.textRestart').append('<p id="scoreCount"> Your final score is '+ count + '</p>' )
+
+
+			cheval = highscore.toString() + " -->" + count.toString() ;
+
+			localStorage.setItem("1.txt" , cheval);
+
+
 		}
 	}
 
@@ -641,14 +644,17 @@ $start.on('click', function() {
 					distance_h1 >= -35)&&
 					(distance_v2 <= 35 &&
 					distance_v2 >= -35 && 
-					$(this).hasClass('bounceOutDown')===false)) {
+					$(this).hasClass('bounceOutDown')=== false)) {
 				var $tick = $('#tick'+lifeUFO)
 				$(this).remove()
 				$tick.toggle(1000)
 				lifeUFO --
-				youLose()
+				if (lifeUFO === 0) {
+
+
+				youLose() }
 			}
-			if ($('.missile').length > 0 && $(this).hasClass('tomato') ==false)  {
+			if ($('.missile').length > 0 && $(this).hasClass('tomato') == false)  {
 				var distance_h = $(this).offset().left - $('.missile').offset().left
 				var distance_v= $(this).offset().top - $('.missile').offset().top
 				console.log(distance_h)
@@ -691,7 +697,19 @@ $start.on('click', function() {
 			$('.missile').remove() }
 
 	},1000/24)
+
+
+
+
+
 })
+
+
+
+
+
+
+
 
 })
 
