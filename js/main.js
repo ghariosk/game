@@ -1,17 +1,11 @@
 var count=0;
 var hits =0 ;
-var lifeBad = 5;
-var lifeMinion=1;
 var lifeUFO=3;
-var countBad=0;
-var countMinion=0;
 var countA=0;
-var cheval;
-var highscore=3;
 var id ="0";
 var bossTime=0;
 var restart = true;
-var upgrade = true;
+var upgrade = false;
 lost=false;
 var i = 0;
 var a=1;
@@ -27,14 +21,14 @@ var words8= "To optimise performance :";
 var words9= "Put the browser in full screen mode.";
 var words10= "Set the keyboard repeat to fast ! ";
 
-	var typing = function (array,turn,clear) {
+	var typing = function (string,turn,clear) {
 		if (turn===a) {
 			click = new Audio("sounds/click.mp3"); // buffers automatically when created
 			click.play();
-			$('#script').append('<p>'+ array.charAt(i)+ '</p>' )
+			$('#script').append('<p>'+ string.charAt(i)+ '</p>' )
 			i++
-			if (i >= array.length) clearInterval(clear); {
-				if (i >= array.length) {
+			if (i >= string.length) clearInterval(clear); {
+				if (i >= string.length) {
 					$('#script').append('<br><br>')
 					a=turn+1
 					i=0
@@ -44,12 +38,6 @@ var words10= "Set the keyboard repeat to fast ! ";
 	};
 
 $(function(){
-	
-	$('form').submit(function (e) {
-
-		highscore = $('#highscore').val();
-		e.preventDefault()
-	})
 
 	$.fn.extend({
 	    animateCss: function (animationName) {
@@ -98,11 +86,7 @@ $(function(){
 	setInterval(function(){
 		if (restart===false) {
 			hits =0 
-			lifeBad = 5
-			lifeMinion=1
 			lifeUFO=3
-			countBad=0
-			countMinion=0
 			countA=0
 			id ="0"
 			bossTime=0
@@ -128,17 +112,6 @@ $(function(){
 
 	$start.on('click', function() {
 
-		// $('#script').on('click', function() {
-		// 	$('#script').slideUp(50)
-
-		// 	// setTimeout(function (){ 
-
-
-		// 	// $('#instruction').css({'display' : "block"})
-
-		//  //   },300)
-		// })
-
 		if ( script !== false ) {script()} ;
 		$('#start').css({"display" : "none"});
 		$('.hidden').css({"display" :'block' });
@@ -150,19 +123,6 @@ $(function(){
 			'width'  : '260px' , 
 			'height' : '600px',
 		},250);
-
-		$('#script').on('click', function() {
-
-			console.log('working');
-			$(this).slideUp(50);
-
-			setTimeout(function (){ 
-
-
-			// $('#instruction').css({'display' : "block"})
-
-		   },300);
-		});
 
 		$('#instruction').css({'display' : 'none'});
 		$('#UFO').animateCss('bounceInUp');
@@ -205,10 +165,12 @@ $(function(){
 			} else if (bossTime===1) {//nothing
 			} else if (bossTime===0) {
 				$('#main').append('<div class="minion bad2" id="'+id + '"> </div> ');
-				$('#main').append('<div class="minion bad2"> </div> ');
+				
 				id ++ ;
 			}
 		},4000);
+
+
 
 		setInterval(function(){
 			animateDivH($('.bad'));
@@ -306,12 +268,12 @@ $(function(){
 				if (parseFloat($(this).css('top').replace('px','')) > 1200 ) {
 					$(this).remove();
 				}
-				var distance_h1 = $(this).offset().left - $('#UFO').offset().left;
-				var distance_v2= $(this).offset().top - $('#UFO').offset().top;
-				if ((distance_h1 <= 35   &&
-						 distance_h1 >= -35) &&
-						  (distance_v2 <= 35 &&
-						   distance_v2 >= -35)) {
+				var distanceH1 = $(this).offset().left - $('#UFO').offset().left;
+				var distanceV2= $(this).offset().top - $('#UFO').offset().top;
+				if ((distanceH1 <= 35   &&
+						 distanceH1 >= -35) &&
+						  (distanceV2 <= 35 &&
+						   distanceV2 >= -35)) {
 					var $tick = $('#tick'+lifeUFO);
 					$tick.delay(2000).fadeOut(3000);
 					$tick.remove();
@@ -324,12 +286,13 @@ $(function(){
 		},1000/24);
 
 		setInterval(function(){
+			try{
 			$('.bad').each(function() {
 				if ($('.missile').length > 0 ) {
-					var distance_h = $(this).offset().left - $('.missile').offset().left;
-					var distance_v= $(this).offset().top - $('.missile').offset().top;
-				if (Math.abs(distance_h) <= 100   &&
-					Math.abs(distance_v) <= 100 ) {
+					var distanceH = $(this).offset().left - $('.missile').offset().left;
+					var distanceV= $(this).offset().top - $('.missile').offset().top;
+				if (Math.abs(distanceH) <= 100   &&
+					Math.abs(distanceV) <= 100 ) {
 						$('.missile').remove();
 						hits ++;
 						countA = countA + hits ;
@@ -362,6 +325,7 @@ $(function(){
 					}	
 				}
 			})
+		} catch (err) {}
 		},1000/24);
 
 		var youLose = function () {
@@ -383,18 +347,17 @@ $(function(){
 		
 		setInterval(function(){ 
 			try {
-				var hit ="url('file:///Users/tech-a44/homework/game/images/exp.png')";
+				var hit ="url('images/exp.png')";
 				$('.minion').each(function() {
 					if (parseFloat($(this).css('top').replace('px','')) > 1200  ) {
 							$(this).remove();
 					}
-					var distance_h1 = $(this).offset().left - $('#UFO').offset().left;
-					var distance_v2= $(this).offset().top - $('#UFO').offset().top;
-					if (    (distance_h1 <= 35 &&
-							distance_h1 >= -35)&&
-							(distance_v2 <= 35 &&
-							distance_v2 >= -35 && 
-							$(this).hasClass('bounceOutDown')=== false)) {
+					var distanceH1 = $(this).offset().left - $('#UFO').offset().left;
+					var distanceV2= $(this).offset().top - $('#UFO').offset().top;
+					if ( Math.abs(distanceH1) <= 35 &&
+							Math.abs(distanceV2) <= 35 &&
+							$(this).hasClass('bounceOutDown') === false ) {
+
 						var $tick = $('#tick'+lifeUFO);
 						$(this).remove();
 						$tick.toggle(1000);
@@ -404,10 +367,10 @@ $(function(){
 						}
 					}
 					if ($('.missile').length > 0 && $(this).hasClass('tomato') == false)  {
-						var distance_h = $(this).offset().left - $('.missile').offset().left
-						var distance_v= $(this).offset().top - $('.missile').offset().top
-						if ((Math.abs(distance_h) <= 35) &&
-							 Math.abs(distance_v) <= 35) {
+						var distanceH = $(this).offset().left - $('.missile').offset().left
+						var distanceV= $(this).offset().top - $('.missile').offset().top
+						if ((Math.abs(distanceH) <= 35) &&
+							 Math.abs(distanceV) <= 35) {
 							$('.missile').remove();
 							hits ++;
 							countA = countA + hits ;
@@ -418,10 +381,10 @@ $(function(){
 								hits =0;
 								$('div #counter').html('<p class="score">' + count + '</p>');
 							} else {
-								var exp = new Audio("images/exp.mp3"); // buffers automatically when created
+								var exp = new Audio("sounds/exp.mp3"); // buffers automatically when created
 								exp.play();
 								count=count+ hits;
-								if (count > 1 ) {
+								if (count >= 15 ) {
 									upgrade=true;
 									$('#dot').fadeIn(200);
 									$('#dot').animateCss('pulse');
